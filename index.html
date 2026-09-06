@@ -1,0 +1,7197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+
+<meta name="theme-color" content="#214a35">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+
+<link rel="manifest" href="../0309/manifest.webmanifest">
+<link rel="apple-touch-icon" href="../0309/icon-192.png">
+
+<title>My Clivia Collection</title>
+
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+
+<style>
+:root{
+ --forest:#173d2b;
+ --forest2:#28563f;
+ --sage:#748b78;
+ --cream:#f7f4ed;
+ --paper:#fffdf9;
+ --sand:#e7dfd0;
+ --gold:#b99a61;
+ --ink:#20251f;
+ --muted:#788078;
+ --danger:#9b4038;
+ --shadow:0 12px 35px rgba(31,45,35,.08);
+ --radius:20px;
+}
+
+*{box-sizing:border-box}
+
+html{background:var(--cream)}
+
+body{
+ margin:0;
+ font-family:Inter,ui-sans-serif,system-ui,-apple-system,
+ BlinkMacSystemFont,"Segoe UI",sans-serif;
+ background:var(--cream);
+ color:var(--ink);
+ letter-spacing:.01em
+}
+
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+
+button:disabled{
+ opacity:.55;
+ cursor:not-allowed
+}
+
+header{
+ background:var(--forest);
+ color:#fff;
+ padding:24px 22px 26px;
+ position:sticky;
+ top:0;
+ z-index:20;
+ box-shadow:0 5px 22px rgba(0,0,0,.12)
+}
+
+.headerrow{
+ max-width:980px;
+ margin:auto;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ gap:20px
+}
+
+.brand{
+ font-family:Georgia,"Times New Roman",serif;
+ font-size:27px;
+ font-weight:500;
+ letter-spacing:.02em
+}
+
+.subtitle{
+ font-size:11px;
+ letter-spacing:.18em;
+ text-transform:uppercase;
+ opacity:.72;
+ margin-top:7px
+}
+
+.iconbtn{
+ background:transparent;
+ border:1px solid rgba(255,255,255,.38);
+ color:#fff;
+ border-radius:999px;
+ padding:9px 15px;
+ font-size:12px;
+ text-transform:uppercase;
+ letter-spacing:.12em
+}
+
+main{
+ max-width:980px;
+ margin:auto;
+ padding:30px 20px 115px
+}
+
+.stats{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:14px;
+ margin-bottom:36px
+}
+
+.stat{
+ background:var(--paper);
+ border:1px solid var(--sand);
+ border-radius:16px;
+ padding:18px;
+ text-align:left
+}
+
+.stat b{
+ font-family:Georgia,serif;
+ font-size:30px;
+ color:var(--forest);
+ display:block;
+ font-weight:500
+}
+
+.stat span{
+ font-size:10px;
+ color:var(--muted);
+ text-transform:uppercase;
+ letter-spacing:.13em
+}
+
+h1,h2,h3{
+ font-family:Georgia,"Times New Roman",serif;
+ font-weight:500;
+ color:var(--forest)
+}
+
+h2{
+ font-size:22px;
+ margin:30px 0 16px
+}
+
+.folders{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:18px
+}
+
+.folder{
+ position:relative;
+ background:var(--paper);
+ border:1px solid var(--sand);
+ border-radius:24px;
+ padding:26px 22px;
+ text-align:left;
+ box-shadow:var(--shadow);
+ cursor:pointer;
+ transition:.2s
+}
+
+.folder:hover{
+ transform:translateY(-3px);
+ box-shadow:0 18px 42px rgba(31,45,35,.12)
+}
+
+.letterAvatar{
+ display:flex!important;
+ align-items:center;
+ justify-content:center;
+ min-width:0!important;
+ width:100%;
+ aspect-ratio:1/1;
+ height:auto!important;
+ padding:18px!important;
+ border-radius:17px!important;
+ font-family:Georgia,serif;
+ font-size:30px!important;
+ font-weight:500!important;
+ color:var(--forest)!important;
+ margin:0 0 22px!important;
+ border:0!important
+}
+
+.folder b{
+ display:block;
+ font-family:Georgia,serif;
+ font-size:22px;
+ font-weight:500;
+ margin:0 0 7px
+}
+
+.folder small{
+ color:var(--muted);
+ font-size:12px
+}
+
+.primary{
+ background:var(--forest);
+ color:#fff;
+ border:0;
+ border-radius:999px;
+ padding:13px 20px;
+ font-weight:600;
+ letter-spacing:.03em
+}
+
+.primary:hover{
+ background:var(--forest2)
+}
+
+.secondary{
+ background:transparent;
+ border:1px solid var(--sand);
+ color:var(--forest);
+ border-radius:999px;
+ padding:10px 15px;
+ font-weight:600
+}
+
+.danger{
+ color:#fff;
+ background:var(--danger);
+ border:0;
+ border-radius:999px;
+ padding:9px 13px
+}
+
+.google{
+ background:#fff;
+ color:#222;
+ border:1px solid var(--sand);
+ border-radius:999px;
+ padding:13px 18px;
+ font-weight:600;
+ width:100%
+}
+
+.homeActions{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:10px;
+ margin-bottom:30px
+}
+
+.homeActions button{
+ width:100%;
+ white-space:nowrap
+}
+
+.subcard{
+ position:relative
+}
+
+.subAdd{
+ margin-top:13px;
+ width:100%;
+ padding:10px 12px;
+ border:1px solid var(--sand);
+ border-radius:999px;
+ background:transparent;
+ color:var(--forest);
+ font-weight:600;
+ font-size:11px
+}
+
+.categoryName{
+ display:flex;
+ align-items:flex-start;
+ justify-content:space-between;
+ gap:10px
+}
+
+.categoryNums{
+ font-size:10px;
+ color:var(--muted);
+ line-height:1.4;
+ text-align:right
+}
+
+.measurementLabel{
+ font-size:10px;
+ color:var(--muted);
+ margin-top:5px
+}
+
+.bottom{
+ position:fixed;
+ bottom:0;
+ left:0;
+ right:0;
+ background:rgba(255,253,249,.96);
+ backdrop-filter:blur(12px);
+ border-top:1px solid var(--sand);
+ display:flex;
+ justify-content:center;
+ gap:12px;
+ padding:10px 12px calc(10px + env(safe-area-inset-bottom));
+ z-index:30
+}
+
+.bottom button{
+ border:0;
+ background:none;
+ color:var(--muted);
+ font-size:10px;
+ text-transform:uppercase;
+ letter-spacing:.11em;
+ padding:8px 18px
+}
+
+.bottom button strong{
+ display:block;
+ font-family:Georgia,serif;
+ font-size:14px;
+ font-weight:500;
+ color:var(--forest);
+ margin-bottom:2px
+}
+
+.hidden{
+ display:none!important
+}
+
+.panel{
+ background:var(--paper);
+ border:1px solid var(--sand);
+ border-radius:20px;
+ padding:20px;
+ margin-bottom:15px;
+ box-shadow:var(--shadow)
+}
+
+.row{
+ display:flex;
+ gap:10px;
+ align-items:center
+}
+
+.between{
+ justify-content:space-between
+}
+
+.field{
+ margin:15px 0
+}
+
+.field label{
+ display:block;
+ font-weight:600;
+ font-size:11px;
+ margin-bottom:7px;
+ text-transform:uppercase;
+ letter-spacing:.1em;
+ color:var(--muted)
+}
+
+.field input,
+.field select,
+.field textarea{
+ width:100%;
+ padding:13px 14px;
+ border:1px solid var(--sand);
+ border-radius:12px;
+ background:#fff;
+ color:var(--ink);
+ outline:none
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus,
+.search:focus{
+ border-color:var(--gold);
+ box-shadow:0 0 0 3px rgba(185,154,97,.12)
+}
+
+.field textarea{
+ min-height:100px;
+ resize:vertical
+}
+
+.requiredLabel::after{
+ content:" *";
+ color:var(--danger);
+ font-weight:800
+}
+
+.photoChoices{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:10px
+}
+
+.photoChoice{
+ padding:15px;
+ border:1px solid var(--sand);
+ border-radius:14px;
+ background:#fff;
+ text-align:center;
+ font-weight:600;
+ color:var(--forest)
+}
+
+.photoGrid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:9px;
+ margin-top:12px
+}
+
+.photoBox{
+ position:relative
+}
+
+.photoGrid img{
+ width:100%;
+ aspect-ratio:1;
+ object-fit:cover;
+ border-radius:12px
+}
+
+.removePhoto{
+ position:absolute;
+ top:5px;
+ right:5px;
+ width:28px;
+ height:28px;
+ border:0;
+ border-radius:50%;
+ background:#222c;
+ color:#fff
+}
+
+.yearHeader{
+ background:var(--forest);
+ color:#fff;
+ padding:11px 14px;
+ border-radius:11px;
+ margin-top:18px;
+ font-size:12px;
+ letter-spacing:.08em
+}
+
+.plantgrid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:16px
+}
+
+.galleryGrid{
+ display:grid;
+ grid-template-columns:repeat(4,1fr);
+ gap:14px
+}
+
+.galleryItem{
+ background:var(--paper);
+ border:1px solid var(--sand);
+ border-radius:18px;
+ overflow:hidden;
+ box-shadow:0 7px 22px rgba(31,45,35,.06);
+ cursor:pointer;
+ transition:.2s
+}
+
+.galleryItem:hover{
+ transform:translateY(-3px);
+ box-shadow:0 14px 30px rgba(31,45,35,.12)
+}
+
+.galleryItem img{
+ display:block;
+ width:100%;
+ aspect-ratio:1;
+ object-fit:cover;
+ background:#e8e4da
+}
+
+.galleryInfo{
+ padding:10px 12px 12px
+}
+
+.galleryInfo b{
+ display:block;
+ font-family:Georgia,serif;
+ font-size:15px;
+ font-weight:500;
+ color:var(--forest)
+}
+
+.galleryInfo span{
+ display:block;
+ font-size:11px;
+ color:var(--muted);
+ margin-top:3px
+}
+
+.galleryInfo small{
+ display:block;
+ font-size:10px;
+ color:var(--muted);
+ margin-top:4px
+}
+
+.plantcard{
+ background:var(--paper);
+ border:1px solid var(--sand);
+ border-radius:18px;
+ overflow:hidden;
+ width:100%;
+ padding:0;
+ text-align:left;
+ box-shadow:0 7px 22px rgba(31,45,35,.06)
+}
+
+.plantcard img{
+ width:100%;
+ aspect-ratio:1;
+ object-fit:cover;
+ background:#ebe7de
+}
+
+.plantcard .p{
+ padding:13px
+}
+
+.plantcard b{
+ display:block;
+ font-family:Georgia,serif;
+ font-size:17px;
+ font-weight:500;
+ color:var(--forest)
+}
+
+.plantcard span{
+ font-size:13px
+}
+
+.plantcard small{
+ color:var(--muted);
+ font-size:10px
+}
+
+.back{
+ border:0;
+ background:none;
+ color:var(--forest);
+ font-weight:600;
+ padding:0;
+ margin-bottom:10px;
+ font-size:12px;
+ text-transform:uppercase;
+ letter-spacing:.08em
+}
+
+.crumb{
+ font-size:10px;
+ text-transform:uppercase;
+ letter-spacing:.14em;
+ color:var(--muted)
+}
+
+.folderTitle{
+ font-size:32px;
+ margin:7px 0 4px
+}
+
+.subgrid{
+ display:grid;
+ grid-template-columns:repeat(3,1fr);
+ gap:16px
+}
+
+.subcard{
+ background:var(--paper);
+ border:1px solid var(--sand);
+ border-radius:18px;
+ padding:18px;
+ cursor:pointer;
+ box-shadow:0 7px 22px rgba(31,45,35,.05)
+}
+
+.swatch{
+ height:64px;
+ border-radius:13px;
+ margin-bottom:15px;
+ border:1px solid rgba(0,0,0,.05)
+}
+
+.subcard b{
+ font-family:Georgia,serif;
+ font-size:18px;
+ font-weight:500;
+ color:var(--forest)
+}
+
+.count{
+ font-size:11px;
+ color:var(--muted);
+ margin-top:5px
+}
+
+.search{
+ width:100%;
+ padding:14px;
+ border:1px solid var(--sand);
+ border-radius:999px;
+ margin-bottom:18px;
+ background:var(--paper);
+ outline:none
+}
+
+.toast{
+ position:fixed;
+ bottom:78px;
+ left:50%;
+ transform:translateX(-50%);
+ background:var(--forest);
+ color:#fff;
+ padding:11px 16px;
+ border-radius:999px;
+ z-index:150;
+ max-width:90%;
+ text-align:center;
+ font-size:12px
+}
+
+.modal{
+ position:fixed;
+ inset:0;
+ background:rgba(20,29,23,.52);
+ backdrop-filter:blur(4px);
+ display:flex;
+ align-items:flex-end;
+ justify-content:center;
+ z-index:40
+}
+
+.modalbox{
+ background:var(--cream);
+ width:100%;
+ max-width:720px;
+ max-height:94vh;
+ overflow:auto;
+ border-radius:28px 28px 0 0;
+ padding:24px;
+ box-shadow:0 -10px 45px rgba(0,0,0,.18)
+}
+
+.manageitem{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ padding:13px 0;
+ border-bottom:1px solid var(--sand);
+ gap:8px
+}
+
+.empty{
+ text-align:center;
+ padding:45px 10px;
+ color:var(--muted);
+ font-size:13px
+}
+
+.user{
+ display:flex;
+ align-items:center;
+ gap:12px;
+ background:var(--paper);
+ border:1px solid var(--sand);
+ padding:14px;
+ border-radius:16px;
+ margin-bottom:15px
+}
+
+.user img{
+ width:42px;
+ height:42px;
+ border-radius:50%
+}
+
+.yearPill{
+ display:inline-block;
+ background:#eef2ec;
+ color:var(--forest);
+ padding:4px 8px;
+ border-radius:999px;
+ font-size:10px;
+ margin-top:6px
+}
+
+.sync{
+ background:#eef2ec;
+ border:1px solid #d6e0d5;
+ border-radius:14px;
+ padding:13px;
+ margin:12px 0;
+ font-size:12px
+}
+
+.sync.ok{
+ color:#205b35
+}
+
+.sync.bad{
+ background:#fbefed;
+ color:#8b302a
+}
+
+.photoStorageNote{
+ background:#eef2ec;
+ border:1px solid #d6e0d5;
+ border-radius:12px;
+ padding:11px;
+ margin-top:12px;
+ font-size:11px;
+ color:#45604d;
+ line-height:1.45
+}
+
+.saveStatus{
+ margin-top:10px;
+ font-size:11px;
+ color:var(--muted);
+ text-align:center;
+ min-height:16px
+}
+
+/* REAL CAMERA */
+
+.cameraScreen{
+ position:fixed;
+ inset:0;
+ z-index:100;
+ background:#000;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center
+}
+
+.cameraVideo{
+ width:100%;
+ height:100%;
+ object-fit:cover;
+ background:#000
+}
+
+.cameraControls{
+ position:absolute;
+ bottom:0;
+ left:0;
+ right:0;
+ padding:20px 20px calc(20px + env(safe-area-inset-bottom));
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:25px;
+ background:linear-gradient(
+  transparent,
+  rgba(0,0,0,.78)
+ )
+}
+
+.cameraCancel{
+ width:60px;
+ height:60px;
+ border:0;
+ border-radius:50%;
+ background:#555;
+ color:#fff;
+ font-size:27px
+}
+
+.cameraShutter{
+ width:78px;
+ height:78px;
+ border:5px solid #fff;
+ border-radius:50%;
+ background:#fff;
+ box-shadow:0 0 0 4px rgba(255,255,255,.35)
+}
+
+.cameraHint{
+ position:absolute;
+ top:18px;
+ left:50%;
+ transform:translateX(-50%);
+ background:rgba(0,0,0,.55);
+ color:#fff;
+ padding:8px 13px;
+ border-radius:999px;
+ font-size:11px;
+ z-index:2
+}
+
+@media(max-width:720px){
+
+ .homeActions{
+  grid-template-columns:1fr
+ }
+
+ .folders,
+ .subgrid{
+  grid-template-columns:1fr
+ }
+
+ .plantgrid,
+ .galleryGrid{
+  grid-template-columns:repeat(2,1fr)
+ }
+
+ .stats{
+  gap:8px
+ }
+
+ .stat{
+  padding:13px
+ }
+
+ .stat b{
+  font-size:24px
+ }
+
+ .brand{
+  font-size:23px
+ }
+
+ main{
+  padding:24px 15px 110px
+ }
+
+ .bottom{
+  gap:0
+ }
+
+ .bottom button{
+  padding:8px 6px;
+  font-size:9px;
+  letter-spacing:.06em
+ }
+
+ .row{
+  flex-wrap:wrap
+ }
+
+}
+
+@media(min-width:721px){
+
+ .modal{
+  align-items:center
+ }
+
+ .modalbox{
+  border-radius:24px
+ }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="headerrow">
+
+<div>
+<div class="brand">My Clivia Collection</div>
+<div class="subtitle">
+A considered record of your Clivia collection
+</div>
+</div>
+
+<button
+ class="iconbtn"
+ type="button"
+ onclick="settingsView()"
+ aria-label="Settings"
+ title="Settings">
+ ⚙
+</button>
+
+</div>
+</header>
+
+<main id="app"></main>
+
+<nav class="bottom">
+
+<button type="button" onclick="home()">
+ Home
+</button>
+
+<button type="button" onclick="collection()">
+ Collection
+</button>
+
+<button type="button" onclick="openPlant()">
+ Add Plant
+</button>
+
+<button type="button" onclick="photoGallery()">
+ Photo Gallery
+</button>
+
+<button type="button" onclick="searchView()">
+ Search
+</button>
+
+</nav>
+
+<div id="modal" class="modal hidden">
+<div class="modalbox" id="modalbox"></div>
+</div>
+
+
+<script>
+
+/* =========================================================
+   GOOGLE
+========================================================= */
+
+const GOOGLE_CLIENT_ID =
+ "153586094533-d46j0o7md4irhou4sj2q43ii4fkait3q.apps.googleusercontent.com";
+
+const DRIVE_SCOPE =
+ "https://www.googleapis.com/auth/drive.file";
+
+const KEY =
+ "cliviaCatalogueV3";
+
+
+/* =========================================================
+   APP STATE
+========================================================= */
+
+const appEl =
+ document.getElementById("app");
+
+const modalEl =
+ document.getElementById("modal");
+
+const modalboxEl =
+ document.getElementById("modalbox");
+
+let accessToken=null;
+let googleUser=null;
+let tokenExpiresAt=null;
+let googleTokenClient=null;
+
+let newPhotos=[];
+let originalPhotoFiles={};
+
+let photosProcessing=false;
+let plantSaving=false;
+
+
+/* =========================================================
+   CAMERA STATE
+========================================================= */
+
+let cameraStream=null;
+let cameraTarget="new";
+let cameraPlantId=null;
+
+
+/* =========================================================
+   LOAD DATA
+========================================================= */
+
+let data;
+
+try{
+
+ data=JSON.parse(
+  localStorage.getItem(KEY)||"null"
+ );
+
+}catch(e){
+
+ console.error(
+  "Could not read catalogue:",
+  e
+ );
+
+ data=null;
+
+}
+
+
+if(
+ !data ||
+ !Array.isArray(data.folders) ||
+ !Array.isArray(data.plants)
+){
+
+ data={
+  folders:[],
+  plants:[]
+ };
+
+}
+
+
+data.plants=
+ Array.isArray(data.plants)
+ ?data.plants
+ :[];
+
+
+/* =========================================================
+   COLOUR CATEGORIES
+========================================================= */
+
+const COLOUR_SUBS=[
+ "Apricot",
+ "Bronze",
+ "Green",
+ "Orange",
+ "Orange Dark",
+ "Orange Light",
+ "Peach",
+ "Peach Dark",
+ "Peach Light",
+ "Pink",
+ "Red",
+ "Salmon",
+ "Yellow",
+ "Yellow Dark",
+ "Yellow Light",
+ "Versi Colour",
+ "Bi-Tone",
+ "Bi-Colour"
+];
+
+
+const COLOUR_NUMBERS={
+
+ "Apricot":"27, 29–30, 35–38, 70",
+ "Bronze":"21–23, 25, 28",
+ "Green":"91–100",
+ "Orange":"24, 26",
+ "Orange Dark":"11–18",
+ "Orange Light":"69",
+ "Peach":"67–68",
+ "Peach Dark":"31–34, 79–80",
+ "Peach Light":"39–40, 53, 55, 71–74",
+ "Pink":"42–52, 54, 56, 58",
+ "Red":"1–10",
+ "Salmon":"19–20, 41",
+ "Yellow":"64, 81–85, 90",
+ "Yellow Dark":"66, 86–89",
+ "Yellow Light":"57, 59–63, 65"
+
+};
+
+
+const MAIN_FOLDER_NAMES=[
+ "Miniata",
+ "Gardenii",
+ "Nobilis",
+ "Caulescens",
+ "Robusta",
+ "Interspec",
+ "Broad Leaf",
+ "Akebono",
+ "Tiger",
+ "Mandarin Duck",
+ "LOB"
+];
+
+
+const MEASUREMENT_FOLDERS=new Set([
+ "Broad Leaf",
+ "Akebono",
+ "Tiger",
+ "Mandarin Duck",
+ "LOB"
+]);
+
+
+/* =========================================================
+   NORMALISE FOLDERS
+========================================================= */
+
+const oldFolders=
+ Array.isArray(data.folders)
+ ?data.folders
+ :[];
+
+
+const oldByName=new Map(
+ oldFolders.map(
+  f=>[
+   String(f?.name||"").trim().toLowerCase(),
+   f
+  ]
+ )
+);
+
+
+data.folders=
+ MAIN_FOLDER_NAMES.map(
+  name=>{
+
+   const old=
+    oldByName.get(
+     name.toLowerCase()
+    );
+
+
+   if(
+    MEASUREMENT_FOLDERS.has(name)
+   ){
+
+    const oldSubs=
+     Array.isArray(old?.subs)
+     ?
+     old.subs
+      .map(String)
+      .filter(Boolean)
+     :
+     [];
+
+
+    const measured=[
+     ...new Set(
+      data.plants
+       .filter(
+        p=>
+         p.folder===name &&
+         p.sub
+       )
+       .map(
+        p=>String(p.sub)
+       )
+     )
+    ];
+
+
+    return {
+
+     name,
+
+     subs:[
+      ...new Set([
+       ...oldSubs,
+       ...measured
+      ])
+     ]
+
+    };
+
+   }
+
+
+   return {
+
+    name,
+
+    subs:[
+     ...COLOUR_SUBS
+    ]
+
+   };
+
+  }
+ );
+
+
+for(const f of oldFolders){
+
+ const n=
+  String(f?.name||"").trim();
+
+
+ if(
+  n &&
+  !MAIN_FOLDER_NAMES.some(
+   x=>
+    x.toLowerCase()===
+    n.toLowerCase()
+  )
+ ){
+
+  data.folders.push({
+
+   name:n,
+
+   subs:
+    Array.isArray(f.subs)
+    ?
+    f.subs.map(String).filter(Boolean)
+    :
+    []
+
+  });
+
+ }
+
+}
+
+
+save();
+
+
+/* =========================================================
+   SAFE STORAGE
+========================================================= */
+
+function save(){
+
+ try{
+
+  const json=
+   JSON.stringify(data);
+
+  const bytes=
+   new Blob([json]).size;
+
+  console.log(
+   "Catalogue storage:",
+   (bytes/(1024*1024)).toFixed(2),
+   "MB"
+  );
+
+  localStorage.setItem(
+   KEY,
+   json
+  );
+
+  const verify=
+   localStorage.getItem(KEY);
+
+  if(verify!==json)
+   throw new Error(
+    "Storage verification failed"
+   );
+
+  return true;
+
+ }catch(e){
+
+  console.error(
+   "Storage error:",
+   e
+  );
+
+  if(
+   e &&
+   (
+    e.name==="QuotaExceededError" ||
+    e.code===22 ||
+    e.code===1014
+   )
+  ){
+
+   toast(
+    "Storage is full. Remove some photos or use Google Drive backup."
+   );
+
+  }else{
+
+   toast(
+    "Could not save the catalogue."
+   );
+
+  }
+
+  return false;
+
+ }
+
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function esc(s=""){
+
+ return String(s).replace(
+  /[&<>"']/g,
+  c=>({
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#39;"
+  }[c])
+ );
+
+}
+
+
+function uid(){
+
+ if(
+  typeof crypto!=="undefined" &&
+  crypto.randomUUID
+ ){
+
+  return crypto.randomUUID();
+
+ }
+
+ return Date.now()+
+  "-"+
+  Math.random()
+   .toString(36)
+   .slice(2);
+
+}
+
+
+/* =========================================================
+   COLOURS
+========================================================= */
+
+const COLORS={
+
+ yellow:"#F4D35E",
+ gold:"#C9A227",
+ orange:"#F28C28",
+ peach:"#F7B7A3",
+ apricot:"#F4A261",
+ bronze:"#9A6A3A",
+ red:"#D95D5D",
+ pink:"#E88CB7",
+ green:"#62A85A",
+ white:"#EDEDE7",
+ cream:"#E8D7B5",
+ salmon:"#E98272"
+
+};
+
+
+function categoryDisplay(s){
+
+ return {
+  name:s,
+  numbers:COLOUR_NUMBERS[s]||""
+ };
+
+}
+
+
+function folderInitials(n){
+
+ return esc(
+  n.trim()
+   .split(/\s+/)
+   .filter(Boolean)
+   .map(
+    w=>
+     w.length>1 &&
+     w===w.toUpperCase()
+     ?
+     w
+     :
+     w[0].toUpperCase()
+   )
+   .join("")||"?"
+ );
+
+}
+
+
+function folderBg(n,i){
+
+ let l=n.toLowerCase();
+
+
+ if(l==="versi colour")
+  return "linear-gradient(135deg,#D95D5D 0 33%,#F4D35E 33% 66%,#62A85A 66% 100%)";
+
+
+ if(l==="bi-tone")
+  return "linear-gradient(135deg,#173d2b 0 50%,#C9A227 50% 100%)";
+
+
+ if(l==="bi-colour")
+  return "linear-gradient(135deg,#E88CB7 0 50%,#F28C28 50% 100%)";
+
+
+ let keys=
+  Object.keys(COLORS)
+   .filter(
+    k=>
+     l.includes(k.toLowerCase())
+   );
+
+
+ if(
+  l.includes("gt") &&
+  !keys.includes("green")
+ )
+  keys.push("green");
+
+
+ if(!keys.length){
+
+  return [
+   "#CFE2FF",
+   "#CDECCB",
+   "#E6D3F2",
+   "#FFE49A",
+   "#D9B38C",
+   "#BFE3DD",
+   "#D8D8D8",
+   "#C9D8F0",
+   "#E5C5D8",
+   "#F1D2B0",
+   "#C5D8C2"
+  ][i%11];
+
+ }
+
+
+ if(keys.length===1)
+  return COLORS[keys[0]];
+
+
+ return "linear-gradient(90deg,"+
+  keys.map(
+   (k,j)=>
+    COLORS[k]+" "+
+    (j*100/keys.length)+"%,"+
+    COLORS[k]+" "+
+    ((j+1)*100/keys.length)+"%"
+  ).join(",")+
+  ")";
+
+}
+
+
+function plantCount(f,s){
+
+ return data.plants.filter(
+  p=>
+   p.folder===f &&
+   p.sub===s
+ ).length;
+
+}
+
+
+function totalPhotos(){
+
+ return data.plants.reduce(
+  (n,p)=>
+   n+
+   (
+    Array.isArray(p.photos)
+    ?
+    p.photos.length
+    :
+    0
+   ),
+  0
+ );
+
+}
+
+
+/* =========================================================
+   HOME
+========================================================= */
+
+function home(){
+
+ appEl.innerHTML=`
+
+ <div class="stats">
+
+  <div class="stat">
+   <b>${data.plants.length}</b>
+   <span>Plants</span>
+  </div>
+
+  <div class="stat">
+   <b>${data.folders.length}</b>
+   <span>Main Folders</span>
+  </div>
+
+  <div class="stat">
+   <b>${totalPhotos()}</b>
+   <span>Photos</span>
+  </div>
+
+ </div>
+
+
+ <div class="homeActions">
+
+  <button
+   type="button"
+   class="primary"
+   onclick="openPlant()">
+
+   Add Plant
+
+  </button>
+
+
+  <button
+   type="button"
+   class="primary"
+   onclick="photoGallery()">
+
+   Photo Gallery
+
+  </button>
+
+
+  ${
+   googleUser
+   ?
+   `
+   <button
+    type="button"
+    class="primary"
+    onclick="accountView()">
+
+    Google Drive Connected
+
+   </button>
+   `
+   :
+   `
+   <button
+    type="button"
+    class="primary"
+    onclick="signInGoogle()">
+
+    Log in to Google Drive
+
+   </button>
+   `
+  }
+
+ </div>
+
+
+ <h2>Collection</h2>
+
+
+ <div class="folders">
+
+ ${
+  data.folders.map(
+   (f,i)=>`
+
+   <div
+    class="folder"
+    onclick="folderView(${i})">
+
+    <div
+     class="letterAvatar"
+     style="background:${folderBg(f.name,i)}">
+
+     ${folderInitials(f.name)}
+
+    </div>
+
+    <b>${esc(f.name)}</b>
+
+    <small>
+
+     ${
+      data.plants.filter(
+       p=>p.folder===f.name
+      ).length
+     }
+
+     plants · ${f.subs.length} categories
+
+    </small>
+
+   </div>
+
+  `
+  ).join("")
+ }
+
+ </div>
+
+ `;
+
+}
+
+
+function collection(){
+ home();
+}
+
+
+/* =========================================================
+   FOLDER
+========================================================= */
+
+function folderView(i){
+
+ const f=data.folders[i];
+
+ if(!f)return;
+
+
+ appEl.innerHTML=`
+
+ <button
+  type="button"
+  class="back"
+  onclick="home()">
+
+  Back
+
+ </button>
+
+
+ <div class="crumb">
+  Collection
+ </div>
+
+
+ <h1 class="folderTitle">
+  ${esc(f.name)}
+ </h1>
+
+
+ <p style="color:var(--muted)">
+
+  ${
+   MEASUREMENT_FOLDERS.has(f.name)
+   ?
+   "Leaf measurement categories — length × breadth."
+   :
+   "Choose a colour category."
+  }
+
+ </p>
+
+
+ ${
+  MEASUREMENT_FOLDERS.has(f.name)
+  ?
+  `
+  <button
+   type="button"
+   class="secondary"
+   style="margin-bottom:16px"
+   onclick="addMeasurementCategory(${i})">
+
+   Add Leaf Measurement Category
+
+  </button>
+  `
+  :
+  ""
+ }
+
+
+ <div class="subgrid">
+
+ ${
+  f.subs.map(
+   (s,j)=>{
+
+    const d=categoryDisplay(s);
+
+    return `
+
+    <div class="subcard">
+
+     <div onclick="subView(${i},${j})">
+
+      <div
+       class="swatch"
+       style="background:${folderBg(s,j)}">
+      </div>
+
+
+      <div class="categoryName">
+
+       <b>${esc(d.name)}</b>
+
+       ${
+        d.numbers
+        ?
+        `
+        <span class="categoryNums">
+         ${esc(d.numbers)}
+        </span>
+        `
+        :
+        ""
+       }
+
+      </div>
+
+
+      ${
+       MEASUREMENT_FOLDERS.has(f.name)
+       ?
+       `
+       <div class="measurementLabel">
+        Leaf length × breadth
+       </div>
+       `
+       :
+       ""
+      }
+
+
+      <div class="count">
+       ${plantCount(f.name,s)} plants
+      </div>
+
+     </div>
+
+
+     <button
+      type="button"
+      class="subAdd"
+      onclick="event.stopPropagation();openPlantByIndex(${i},${j})">
+
+      Add Plant
+
+     </button>
+
+    </div>
+
+    `;
+
+   }
+  ).join("")
+ }
+
+ </div>
+
+ `;
+
+}
+
+
+function addMeasurementCategory(i){
+
+ let l=prompt(
+  "Leaf length in cm:"
+ );
+
+ if(l===null)return;
+
+
+ let b=prompt(
+  "Leaf breadth in cm:"
+ );
+
+ if(b===null)return;
+
+
+ l=Number(l);
+ b=Number(b);
+
+
+ if(!l||!b){
+
+  toast(
+   "Enter valid length and breadth"
+  );
+
+  return;
+
+ }
+
+
+ let f=data.folders[i];
+
+
+ let sub=
+  `${l} × ${b} cm`;
+
+
+ if(!f.subs.includes(sub))
+  f.subs.push(sub);
+
+
+ if(!save())return;
+
+
+ folderView(i);
+
+
+ toast(
+  "Measurement category added"
+ );
+
+}
+
+
+/* =========================================================
+   SUBFOLDER
+========================================================= */
+
+function subView(fi,si){
+
+ const f=data.folders[fi];
+ const s=f?.subs[si];
+
+ if(!s)return;
+
+
+ const ps=
+  data.plants.filter(
+   p=>
+    p.folder===f.name &&
+    p.sub===s
+  );
+
+
+ const d=categoryDisplay(s);
+
+
+ appEl.innerHTML=`
+
+ <button
+  type="button"
+  class="back"
+  onclick="folderView(${fi})">
+
+  Back ${esc(f.name)}
+
+ </button>
+
+
+ <div class="crumb">
+  ${esc(f.name)}
+ </div>
+
+
+ <div class="categoryName">
+
+  <h1 class="folderTitle">
+   ${esc(d.name)}
+  </h1>
+
+
+  ${
+   d.numbers
+   ?
+   `
+   <span class="categoryNums">
+    ${esc(d.numbers)}
+   </span>
+   `
+   :
+   ""
+  }
+
+ </div>
+
+
+ ${
+  MEASUREMENT_FOLDERS.has(f.name)
+  ?
+  `
+  <div class="measurementLabel">
+   Leaf length × breadth
+  </div>
+  `
+  :
+  ""
+ }
+
+
+ <button
+  type="button"
+  class="primary"
+  style="margin:12px 0 18px"
+  onclick="openPlantByIndex(${fi},${si})">
+
+  Add Plant
+
+ </button>
+
+
+ ${
+  ps.length
+  ?
+  `
+  <div class="plantgrid">
+   ${ps.map(card).join("")}
+  </div>
+  `
+  :
+  `
+  <div class="panel empty">
+   This section is ready for your first plant.
+  </div>
+  `
+ }
+
+ `;
+
+}
+
+
+/* =========================================================
+   ADD PLANT FROM INDEX
+========================================================= */
+
+function openPlantByIndex(folderIndex,subIndex){
+
+ const f=
+  data.folders[folderIndex];
+
+
+ if(!f){
+
+  toast(
+   "Main folder could not be found."
+  );
+
+  return;
+
+ }
+
+
+ const s=
+  Array.isArray(f.subs)
+  ?
+  f.subs[subIndex]
+  :
+  null;
+
+
+ if(!s){
+
+  toast(
+   "Category could not be found."
+  );
+
+  return;
+
+ }
+
+
+ openPlant(
+  f.name,
+  s
+ );
+
+}
+
+
+/* =========================================================
+   IMAGE COMPRESSION
+========================================================= */
+
+function compressImage(file){
+
+ return new Promise(
+  (resolve,reject)=>{
+
+   if(!file){
+
+    reject(
+     new Error("No image file")
+    );
+
+    return;
+
+   }
+
+
+   const reader=
+    new FileReader();
+
+
+   reader.onload=function(e){
+
+    const img=
+     new Image();
+
+
+    img.onload=function(){
+
+     const MAX_SIZE=1200;
+
+
+     let width=img.width;
+     let height=img.height;
+
+
+     if(
+      width>MAX_SIZE ||
+      height>MAX_SIZE
+     ){
+
+      if(width>height){
+
+       height=
+        Math.round(
+         height*MAX_SIZE/width
+        );
+
+       width=MAX_SIZE;
+
+      }else{
+
+       width=
+        Math.round(
+         width*MAX_SIZE/height
+        );
+
+       height=MAX_SIZE;
+
+      }
+
+     }
+
+
+     const canvas=
+      document.createElement("canvas");
+
+
+     canvas.width=width;
+     canvas.height=height;
+
+
+     const ctx=
+      canvas.getContext(
+       "2d",
+       {alpha:false}
+      );
+
+
+     if(!ctx){
+
+      reject(
+       new Error("Canvas unavailable")
+      );
+
+      return;
+
+     }
+
+
+     ctx.drawImage(
+      img,
+      0,
+      0,
+      width,
+      height
+     );
+
+
+     resolve(
+      canvas.toDataURL(
+       "image/jpeg",
+       .70
+      )
+     );
+
+    };
+
+
+    img.onerror=function(){
+
+     reject(
+      new Error(
+       "Image could not be loaded"
+      )
+     );
+
+    };
+
+
+    img.src=e.target.result;
+
+   };
+
+
+   reader.onerror=function(){
+
+    reject(
+     new Error(
+      "File could not be read"
+     )
+    );
+
+   };
+
+
+   reader.readAsDataURL(file);
+
+  }
+ );
+
+}
+
+
+/* =========================================================
+   PHOTO CONTROL STATE
+========================================================= */
+
+function updatePhotoControls(disabled){
+
+ document
+  .querySelectorAll(".photoChoice")
+  .forEach(
+   b=>b.disabled=disabled
+  );
+
+}
+
+
+function setSaveStatus(text){
+
+ const el=
+  document.getElementById(
+   "saveStatus"
+  );
+
+
+ if(el)
+  el.textContent=text||"";
+
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function renderPreview(){
+
+ const el=
+  document.getElementById(
+   "preview"
+  );
+
+
+ if(!el)return;
+
+
+ el.innerHTML=
+  newPhotos.map(
+   (p,i)=>`
+
+   <div class="photoBox">
+
+    <img
+     src="${p.data}"
+     alt="">
+
+    <button
+     type="button"
+     class="removePhoto"
+     onclick="removeNewPhoto(${i})">
+
+     ×
+
+    </button>
+
+   </div>
+
+   `
+  ).join("");
+
+}
+
+
+function removeNewPhoto(index){
+
+ if(photosProcessing){
+
+  toast(
+   "Please wait until photo processing finishes."
+  );
+
+  return;
+
+ }
+
+
+ const photo=newPhotos[index];
+
+
+ if(photo?.id)
+  delete originalPhotoFiles[
+   photo.id
+  ];
+
+
+ newPhotos.splice(index,1);
+
+
+ renderPreview();
+
+}
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+async function handleNewPhotos(input){
+
+ if(photosProcessing){
+
+  toast(
+   "Please wait for the current photo to finish."
+  );
+
+  if(input)
+   input.value="";
+
+  return;
+
+ }
+
+
+ const files=
+  [...(input.files||[])];
+
+
+ if(!files.length)
+  return;
+
+
+ const year=
+  document.getElementById(
+   "photoYear"
+  )?.value ||
+  new Date().getFullYear();
+
+
+ photosProcessing=true;
+
+
+ updatePhotoControls(true);
+
+
+ setSaveStatus(
+  "Processing gallery photo(s)..."
+ );
+
+
+ toast(
+  "Processing gallery photo(s)..."
+ );
+
+
+ try{
+
+  for(const file of files){
+
+   try{
+
+    const compressed=
+     await compressImage(file);
+
+
+    const id=uid();
+
+
+    originalPhotoFiles[id]=file;
+
+
+    newPhotos.push({
+
+     id:id,
+
+     name:
+      file.name||
+      `Clivia-${Date.now()}.jpg`,
+
+     year:String(year),
+
+     data:compressed,
+
+     synced:false,
+
+     addedAt:Date.now()
+
+    });
+
+
+    renderPreview();
+
+
+   }catch(err){
+
+    console.error(
+     "Gallery photo error:",
+     err
+    );
+
+
+    toast(
+     "One gallery photo could not be processed."
+    );
+
+   }
+
+  }
+
+ }finally{
+
+  photosProcessing=false;
+
+
+  updatePhotoControls(false);
+
+
+  setSaveStatus(
+   "Photo(s) ready. You can save the plant."
+  );
+
+
+  renderPreview();
+
+
+  if(input)
+   input.value="";
+
+ }
+
+}
+
+
+/* =========================================================
+   REAL REAR CAMERA
+========================================================= */
+
+async function openCamera(){
+
+ if(photosProcessing){
+
+  toast(
+   "Please wait for the current photo to finish."
+  );
+
+  return;
+
+ }
+
+
+ cameraTarget="new";
+ cameraPlantId=null;
+
+
+ if(
+  navigator.mediaDevices &&
+  navigator.mediaDevices.getUserMedia
+ ){
+
+  try{
+
+   cameraStream=
+    await navigator.mediaDevices.getUserMedia({
+
+     video:{
+      facingMode:{
+       ideal:"environment"
+      },
+      width:{
+       ideal:1920
+      },
+      height:{
+       ideal:1080
+      }
+     },
+
+     audio:false
+
+    });
+
+
+   showCameraScreen();
+
+   return;
+
+  }catch(error){
+
+   console.warn(
+    "Rear camera could not be opened:",
+    error
+   );
+
+  }
+
+ }
+
+
+ const camera=
+  document.getElementById(
+   "cameraInput"
+  );
+
+
+ if(!camera){
+
+  toast(
+   "Camera is not available."
+  );
+
+  return;
+
+ }
+
+
+ camera.value="";
+
+
+ camera.click();
+
+}
+
+
+/* =========================================================
+   CAMERA SCREEN
+========================================================= */
+
+function showCameraScreen(){
+
+ const old=
+  document.getElementById(
+   "cameraScreen"
+  );
+
+
+ if(old)
+  old.remove();
+
+
+ const overlay=
+  document.createElement("div");
+
+
+ overlay.id=
+  "cameraScreen";
+
+
+ overlay.className=
+  "cameraScreen";
+
+
+ overlay.innerHTML=`
+
+ <div class="cameraHint">
+  Rear camera
+ </div>
+
+
+ <video
+  id="cameraVideo"
+  class="cameraVideo"
+  autoplay
+  playsinline
+  muted>
+ </video>
+
+
+ <div class="cameraControls">
+
+  <button
+   type="button"
+   class="cameraCancel"
+   onclick="closeCamera()">
+
+   ×
+
+  </button>
+
+
+  <button
+   type="button"
+   class="cameraShutter"
+   onclick="takeCameraPhoto()"
+   aria-label="Take photograph">
+
+  </button>
+
+ </div>
+
+ `;
+
+
+ document.body.appendChild(
+  overlay
+ );
+
+
+ const video=
+  document.getElementById(
+   "cameraVideo"
+  );
+
+
+ if(video){
+
+  video.srcObject=
+   cameraStream;
+
+
+  video.play().catch(
+   e=>
+    console.warn(
+     "Camera video play:",
+     e
+    )
+  );
+
+ }
+
+}
+
+
+/* =========================================================
+   TAKE CAMERA PHOTO
+========================================================= */
+
+async function takeCameraPhoto(){
+
+ if(!cameraStream){
+
+  toast(
+   "Camera is not ready."
+  );
+
+  return;
+
+ }
+
+
+ const video=
+  document.getElementById(
+   "cameraVideo"
+  );
+
+
+ if(!video){
+
+  toast(
+   "Camera preview is unavailable."
+  );
+
+  return;
+
+ }
+
+
+ if(
+  !video.videoWidth ||
+  !video.videoHeight
+ ){
+
+  toast(
+   "Camera is still starting. Please try again."
+  );
+
+  return;
+
+ }
+
+
+ try{
+
+  const canvas=
+   document.createElement(
+    "canvas"
+   );
+
+
+  canvas.width=
+   video.videoWidth;
+
+
+  canvas.height=
+   video.videoHeight;
+
+
+  const ctx=
+   canvas.getContext("2d");
+
+
+  if(!ctx)
+   throw new Error(
+    "Canvas unavailable"
+   );
+
+
+  ctx.drawImage(
+   video,
+   0,
+   0,
+   canvas.width,
+   canvas.height
+  );
+
+
+  const blob=
+   await new Promise(
+    (resolve,reject)=>{
+
+     canvas.toBlob(
+      b=>{
+
+       if(b)
+        resolve(b);
+       else
+        reject(
+         new Error(
+          "Could not create photograph"
+         )
+        );
+
+      },
+      "image/jpeg",
+      .92
+     );
+
+    }
+   );
+
+
+  const file=
+   new File(
+    [blob],
+    `Clivia-Camera-${Date.now()}.jpg`,
+    {
+     type:"image/jpeg"
+    }
+   );
+
+
+  const target=
+   cameraTarget;
+
+
+  const pid=
+   cameraPlantId;
+
+
+  closeCamera();
+
+
+  if(target==="new"){
+
+   await processCameraFile(
+    file
+   );
+
+   return;
+
+  }
+
+
+  if(target==="year"){
+
+   await processYearCameraFile(
+    file,
+    pid
+   );
+
+  }
+
+
+ }catch(error){
+
+  console.error(
+   "Taking camera photo failed:",
+   error
+  );
+
+
+  toast(
+   "Could not take the photograph."
+  );
+
+ }
+
+}
+
+
+/* =========================================================
+   CLOSE CAMERA
+========================================================= */
+
+function closeCamera(){
+
+ if(cameraStream){
+
+  cameraStream
+   .getTracks()
+   .forEach(
+    track=>track.stop()
+   );
+
+  cameraStream=null;
+
+ }
+
+
+ const screen=
+  document.getElementById(
+   "cameraScreen"
+  );
+
+
+ if(screen)
+  screen.remove();
+
+}
+
+
+/* =========================================================
+   CAMERA FALLBACK
+========================================================= */
+
+async function handleCameraPhoto(input){
+
+ if(!input)
+  return;
+
+
+ const file=
+  input.files &&
+  input.files.length
+  ?
+  input.files[0]
+  :
+  null;
+
+
+ input.value="";
+
+
+ if(!file)
+  return;
+
+
+ await processCameraFile(
+  file
+ );
+
+}
+
+
+/* =========================================================
+   PROCESS NEW CAMERA PHOTO
+========================================================= */
+
+async function processCameraFile(file){
+
+ if(!file)
+  return;
+
+
+ if(photosProcessing){
+
+  toast(
+   "Please wait for the current photo to finish."
+  );
+
+  return;
+
+ }
+
+
+ const year=
+  document.getElementById(
+   "photoYear"
+  )?.value ||
+  new Date().getFullYear();
+
+
+ photosProcessing=true;
+
+
+ updatePhotoControls(true);
+
+
+ setSaveStatus(
+  "Processing camera photo..."
+ );
+
+
+ toast(
+  "Processing camera photo..."
+ );
+
+
+ try{
+
+  const compressed=
+   await compressImage(file);
+
+
+  const id=uid();
+
+
+  originalPhotoFiles[id]=file;
+
+
+  newPhotos.push({
+
+   id:id,
+
+   name:
+    file.name||
+    `Clivia-Camera-${Date.now()}.jpg`,
+
+   year:String(year),
+
+   data:compressed,
+
+   synced:false,
+
+   addedAt:Date.now()
+
+  });
+
+
+  renderPreview();
+
+
+  setSaveStatus(
+   "Camera photo added. You can save the plant."
+  );
+
+
+  toast(
+   "Camera photo added"
+  );
+
+
+ }catch(error){
+
+  console.error(
+   "Camera photo processing failed:",
+   error
+  );
+
+
+  setSaveStatus(
+   "Camera photo could not be processed."
+  );
+
+
+  toast(
+   "Could not process the camera photo."
+  );
+
+
+ }finally{
+
+  photosProcessing=false;
+
+
+  updatePhotoControls(false);
+
+
+  renderPreview();
+
+ }
+
+}
+
+
+/* =========================================================
+   OPEN ADD PLANT
+========================================================= */
+
+function openPlant(folder="",sub=""){
+
+ newPhotos=[];
+ originalPhotoFiles={};
+
+ photosProcessing=false;
+ plantSaving=false;
+
+
+ modalboxEl.innerHTML=`
+
+ <div class="row between">
+
+  <h2 style="margin:0">
+   Add Plant
+  </h2>
+
+
+  <button
+   type="button"
+   class="secondary"
+   onclick="closeModal()">
+
+   Close
+
+  </button>
+
+ </div>
+
+
+ <div class="panel">
+
+  <div class="field">
+
+   <label class="requiredLabel">
+    Plant ID
+   </label>
+
+   <input
+    id="pnumber"
+    placeholder="e.g. M-26-001"
+    required
+    autocomplete="off">
+
+  </div>
+
+
+  <div class="field">
+
+   <label>
+    Cross (Name/Cross)
+   </label>
+
+   <input
+    id="pname"
+    placeholder="e.g. cultivar name / parent A × parent B">
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Main Folder</label>
+
+   <select
+    id="pfolder"
+    onchange="renderSubSelect()">
+   </select>
+
+  </div>
+
+
+  <div
+   id="colourField"
+   class="field">
+
+   <label>Colour / Category</label>
+
+   <select id="psub"></select>
+
+  </div>
+
+
+  <div
+   id="measurementFields"
+   class="panel hidden">
+
+   <div class="crumb">
+    Leaf measurement
+   </div>
+
+
+   <div
+    class="row"
+    style="gap:12px">
+
+    <div
+     class="field"
+     style="flex:1">
+
+     <label>Length (cm)</label>
+
+     <input
+      id="leafLength"
+      type="number"
+      min="0"
+      step="0.1">
+
+    </div>
+
+
+    <div
+     class="field"
+     style="flex:1">
+
+     <label>Breadth (cm)</label>
+
+     <input
+      id="leafBreadth"
+      type="number"
+      min="0"
+      step="0.1">
+
+    </div>
+
+   </div>
+
+
+   <p
+    style="
+     margin:0;
+     color:var(--muted);
+     font-size:12px">
+
+    A Length × Breadth category
+    will be created automatically.
+
+   </p>
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Breeder</label>
+
+   <input id="breeder">
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Parentage</label>
+
+   <input id="parentage">
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Date Acquired</label>
+
+   <input
+    id="acq"
+    type="date">
+
+  </div>
+
+
+  <div class="field">
+
+   <label>First Flowered Year</label>
+
+   <input
+    id="flower"
+    type="number"
+    min="1900"
+    max="2200">
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Notes</label>
+
+   <textarea id="notes"></textarea>
+
+  </div>
+
+
+  <div class="field">
+
+   <label>Photo Year</label>
+
+   <input
+    id="photoYear"
+    type="number"
+    value="${new Date().getFullYear()}">
+
+  </div>
+
+
+  <div class="photoChoices">
+
+   <button
+    type="button"
+    class="photoChoice"
+    onclick="openCamera()">
+
+    📷 Take Photo
+
+   </button>
+
+
+   <button
+    type="button"
+    class="photoChoice"
+    onclick="document.getElementById('galleryInput').click()">
+
+    🖼 Gallery
+
+   </button>
+
+  </div>
+
+
+  <input
+   id="cameraInput"
+   type="file"
+   accept="image/*"
+   capture="environment"
+   hidden
+   onchange="handleCameraPhoto(this)">
+
+
+  <input
+   id="galleryInput"
+   type="file"
+   accept="image/*"
+   multiple
+   hidden
+   onchange="handleNewPhotos(this)">
+
+
+  <div
+   id="preview"
+   class="photoGrid">
+  </div>
+
+
+  <div
+   id="saveStatus"
+   class="saveStatus">
+  </div>
+
+
+  <div class="photoStorageNote">
+
+   <b>Photo quality:</b>
+
+   The catalogue stores a compressed
+   copy to save space.
+
+   Your original camera/gallery photo
+   is not changed.
+
+   If Google Drive is connected,
+   the original-quality photo is
+   uploaded while it is available.
+
+  </div>
+
+ </div>
+
+
+ <button
+  id="savePlantButton"
+  type="button"
+  class="primary"
+  onclick="safeAddPlant(event)">
+
+  SAVE PLANT
+
+ </button>
+
+ `;
+
+
+ openModal();
+
+
+ const pf=
+  document.getElementById(
+   "pfolder"
+  );
+
+
+ pf.innerHTML=
+  data.folders.map(
+   f=>`
+
+   <option value="${esc(f.name)}">
+    ${esc(f.name)}
+   </option>
+
+   `
+  ).join("");
+
+
+ if(
+  folder &&
+  data.folders.some(
+   f=>f.name===folder
+  )
+ ){
+
+  pf.value=folder;
+
+ }
+
+
+ renderSubSelect(
+  sub
+ );
+
+}
+
+
+/* =========================================================
+   SUB SELECT
+========================================================= */
+
+function renderSubSelect(preselect=""){
+
+ const pf=
+  document.getElementById(
+   "pfolder"
+  );
+
+
+ const ps=
+  document.getElementById(
+   "psub"
+  );
+
+
+ const cf=
+  document.getElementById(
+   "colourField"
+  );
+
+
+ const mf=
+  document.getElementById(
+   "measurementFields"
+  );
+
+
+ if(!pf||!ps)
+  return;
+
+
+ const f=
+  data.folders.find(
+   x=>x.name===pf.value
+  );
+
+
+ const isM=
+  MEASUREMENT_FOLDERS.has(
+   pf.value
+  );
+
+
+ cf?.classList.toggle(
+  "hidden",
+  isM
+ );
+
+
+ mf?.classList.toggle(
+  "hidden",
+  !isM
+ );
+
+
+ ps.innerHTML=
+  (f?.subs||[])
+   .map(
+    s=>`
+
+    <option value="${esc(s)}">
+     ${esc(s)}
+    </option>
+
+    `
+   ).join("");
+
+
+ if(
+  preselect &&
+  f?.subs.includes(preselect)
+ ){
+
+  ps.value=
+   preselect;
+
+ }
+
+}
+
+
+/* =========================================================
+   SAFE SAVE
+========================================================= */
+
+function safeAddPlant(event){
+
+ if(event){
+
+  event.preventDefault();
+  event.stopPropagation();
+
+ }
+
+
+ if(plantSaving){
+
+  toast(
+   "Plant is already being saved."
+  );
+
+  return;
+
+ }
+
+
+ if(photosProcessing){
+
+  setSaveStatus(
+   "Please wait — camera photo is still processing."
+  );
+
+
+  toast(
+   "Please wait for the camera photo to finish processing."
+  );
+
+
+  return;
+
+ }
+
+
+ /*
+  PLANT ID IS COMPULSORY
+ */
+
+ const number=
+  document.getElementById(
+   "pnumber"
+  )?.value.trim()||"";
+
+
+ if(!number){
+
+  const idField=
+   document.getElementById(
+    "pnumber"
+   );
+
+
+  if(idField){
+
+   idField.focus();
+
+   idField.reportValidity();
+
+  }
+
+
+  setSaveStatus(
+   "Plant ID is required."
+  );
+
+
+  toast(
+   "Please enter the Plant ID."
+  );
+
+
+  return;
+
+ }
+
+
+ const button=
+  document.getElementById(
+   "savePlantButton"
+  );
+
+
+ if(!button){
+
+  toast(
+   "Save button could not be found."
+  );
+
+  return;
+
+ }
+
+
+ addPlant().catch(
+  error=>{
+
+   console.error(
+    "Save Plant error:",
+    error
+   );
+
+
+   plantSaving=false;
+
+
+   button.disabled=false;
+   button.textContent="SAVE PLANT";
+
+
+   setSaveStatus(
+    "Save failed. Please try again."
+   );
+
+
+   toast(
+    "Could not save the plant."
+   );
+
+  }
+ );
+
+}
+
+
+/* =========================================================
+   ADD PLANT
+========================================================= */
+
+async function addPlant(){
+
+ if(plantSaving){
+
+  toast(
+   "Plant is already being saved."
+  );
+
+  return;
+
+ }
+
+
+ if(photosProcessing){
+
+  toast(
+   "Please wait for the photo to finish processing."
+  );
+
+  return;
+
+ }
+
+
+ let number=
+  document.getElementById(
+   "pnumber"
+  )?.value.trim()||"";
+
+
+ /*
+  NEVER automatically generate
+  a Plant ID.
+ */
+
+ if(!number){
+
+  const field=
+   document.getElementById(
+    "pnumber"
+   );
+
+
+  if(field){
+
+   field.focus();
+   field.reportValidity();
+
+  }
+
+
+  toast(
+   "Plant ID is required."
+  );
+
+
+  return;
+
+ }
+
+
+ let folder=
+  document.getElementById(
+   "pfolder"
+  )?.value||"";
+
+
+ let sub=
+  document.getElementById(
+   "psub"
+  )?.value||"";
+
+
+ if(!folder){
+
+  toast(
+   "Choose a main folder"
+  );
+
+  return;
+
+ }
+
+
+ let ll=
+  document.getElementById(
+   "leafLength"
+  )?.value||"";
+
+
+ let lb=
+  document.getElementById(
+   "leafBreadth"
+  )?.value||"";
+
+
+ if(
+  MEASUREMENT_FOLDERS.has(folder)
+ ){
+
+  if(!ll||!lb){
+
+   toast(
+    "Enter leaf length and breadth"
+   );
+
+   return;
+
+  }
+
+
+  sub=
+   `${Number(ll)} × ${Number(lb)} cm`;
+
+
+  const f=
+   data.folders.find(
+    x=>x.name===folder
+   );
+
+
+  if(
+   f &&
+   !f.subs.includes(sub)
+  ){
+
+   f.subs.push(sub);
+
+  }
+
+ }
+
+
+ plantSaving=true;
+
+
+ const saveButton=
+  document.getElementById(
+   "savePlantButton"
+  );
+
+
+ if(saveButton){
+
+  saveButton.disabled=true;
+  saveButton.textContent="SAVING...";
+
+ }
+
+
+ setSaveStatus(
+  "Saving plant..."
+ );
+
+
+ const photos=
+  newPhotos.map(
+   p=>({...p})
+  );
+
+
+ const p={
+
+  id:uid(),
+
+  number:number,
+
+  /*
+   This is now the Cross field.
+  */
+
+  name:
+   document.getElementById(
+    "pname"
+   )?.value.trim(),
+
+
+  folder,
+
+  sub,
+
+
+  breeder:
+   document.getElementById(
+    "breeder"
+   )?.value.trim(),
+
+
+  parentage:
+   document.getElementById(
+    "parentage"
+   )?.value.trim(),
+
+
+  acq:
+   document.getElementById(
+    "acq"
+   )?.value||"",
+
+
+  flower:
+   document.getElementById(
+    "flower"
+   )?.value||"",
+
+
+  notes:
+   document.getElementById(
+    "notes"
+   )?.value.trim(),
+
+
+  leafLength:ll,
+
+  leafBreadth:lb,
+
+  photos,
+
+  created:
+   new Date().toISOString()
+
+ };
+
+
+ /*
+  NO autoNumber() HERE.
+  The user supplied ID is used.
+ */
+
+ data.plants.push(p);
+
+
+ if(!save()){
+
+  data.plants=
+   data.plants.filter(
+    x=>x.id!==p.id
+   );
+
+
+  plantSaving=false;
+
+
+  if(saveButton){
+
+   saveButton.disabled=false;
+   saveButton.textContent="SAVE PLANT";
+
+  }
+
+
+  return;
+
+ }
+
+
+ const fi=
+  data.folders.findIndex(
+   f=>f.name===folder
+  );
+
+
+ const si=
+  fi>=0
+  ?
+  data.folders[fi].subs.indexOf(sub)
+  :
+  -1;
+
+
+ newPhotos=[];
+
+
+ closeModal();
+
+
+ if(fi>=0&&si>=0){
+
+  subView(
+   fi,
+   si
+  );
+
+ }else{
+
+  home();
+
+ }
+
+
+ toast(
+  "Plant saved successfully"
+ );
+
+
+ if(googleUser){
+
+  uploadPlantPhotos(p);
+
+ }
+
+
+ plantSaving=false;
+
+}
+
+
+/* =========================================================
+   FIRST PHOTO
+========================================================= */
+
+function firstPhoto(p){
+
+ const photos=
+  (p.photos||[])
+   .filter(
+    x=>x&&x.data
+   );
+
+
+ if(!photos.length)
+  return "";
+
+
+ return photos
+  .slice()
+  .sort(
+   (a,b)=>{
+
+    const ya=Number(a.year)||0;
+    const yb=Number(b.year)||0;
+
+
+    if(yb!==ya)
+     return yb-ya;
+
+
+    return (
+     (Number(b.addedAt)||0)-
+     (Number(a.addedAt)||0)
+    );
+
+   }
+  )[0].data;
+
+}
+
+
+/* =========================================================
+   PLANT CARD
+========================================================= */
+
+function card(p){
+
+ const image=
+  firstPhoto(p);
+
+
+ return `
+
+ <button
+  type="button"
+  class="plantcard"
+  onclick="viewPlant('${p.id}')">
+
+
+  ${
+   image
+   ?
+   `
+   <img
+    src="${image}"
+    alt="">
+   `
+   :
+   `
+   <div
+    style="
+     aspect-ratio:1;
+     background:#e8e4da;
+     display:flex;
+     align-items:center;
+     justify-content:center;
+     font-size:45px">
+
+    🌱
+
+   </div>
+   `
+  }
+
+
+  <div class="p">
+
+   <b>
+    ${esc(p.number||"No ID")}
+   </b>
+
+
+   <span>
+    ${esc(p.name||"No Cross entered")}
+   </span>
+
+
+   <br>
+
+
+   <small>
+    ${esc(p.folder)}
+    ·
+    ${esc(p.sub)}
+   </small>
+
+
+   ${
+    p.photos?.length
+    ?
+    `
+    <div class="yearPill">
+     ${p.photos.length} photo(s)
+    </div>
+    `
+    :
+    ""
+   }
+
+  </div>
+
+ </button>
+
+ `;
+
+}
+
+
+/* =========================================================
+   PHOTO GALLERY
+========================================================= */
+
+function photoGallery(){
+
+ let photos=[];
+
+
+ data.plants.forEach(
+  p=>{
+
+   (p.photos||[]).forEach(
+    photo=>{
+
+     if(photo&&photo.data){
+
+      photos.push({
+
+       plantId:p.id,
+
+       number:
+        p.number||
+        "No ID",
+
+       name:
+        p.name||
+        "No Cross entered",
+
+       folder:p.folder||"",
+
+       sub:p.sub||"",
+
+       year:
+        String(photo.year||""),
+
+       data:photo.data,
+
+       addedAt:
+        Number(photo.addedAt)||0
+
+      });
+
+     }
+
+    }
+   );
+
+  }
+ );
+
+
+ photos.sort(
+  (a,b)=>{
+
+   const ya=Number(a.year)||0;
+   const yb=Number(b.year)||0;
+
+
+   if(yb!==ya)
+    return yb-ya;
+
+
+   return b.addedAt-a.addedAt;
+
+  }
+ );
+
+
+ appEl.innerHTML=`
+
+ <button
+  type="button"
+  class="back"
+  onclick="home()">
+
+  Back
+
+ </button>
+
+
+ <div class="crumb">
+  Collection
+ </div>
+
+
+ <h1 class="folderTitle">
+  Photo Gallery
+ </h1>
+
+
+ <p style="color:var(--muted)">
+  All photographs in your Clivia collection.
+ </p>
+
+
+ <div class="panel">
+
+  <b>${photos.length}</b>
+
+  <span
+   style="color:var(--muted);font-size:12px">
+
+   photographs
+
+  </span>
+
+ </div>
+
+
+ ${
+  photos.length
+  ?
+  `
+  <div class="galleryGrid">
+
+   ${
+    photos.map(
+     x=>`
+
+     <div
+      class="galleryItem"
+      onclick="viewPlant('${x.plantId}')">
+
+      <img
+       src="${x.data}"
+       alt="${esc(x.number)}">
+
+      <div class="galleryInfo">
+
+       <b>${esc(x.number)}</b>
+
+       <span>${esc(x.name)}</span>
+
+       <small>
+        ${esc(x.folder)}
+        ·
+        ${esc(x.sub)}
+        ·
+        ${esc(x.year)}
+       </small>
+
+      </div>
+
+     </div>
+
+     `
+    ).join("")
+   }
+
+  </div>
+  `
+  :
+  `
+  <div class="panel empty">
+   No photographs have been added yet.
+  </div>
+  `
+ }
+
+ `;
+
+}
+
+
+/* =========================================================
+   VIEW PLANT
+========================================================= */
+
+function viewPlant(pid){
+
+ const p=
+  data.plants.find(
+   x=>x.id===pid
+  );
+
+
+ if(!p)return;
+
+
+ if(!Array.isArray(p.photos))
+  p.photos=[];
+
+
+ const grouped={};
+
+
+ p.photos.forEach(
+  x=>
+   (grouped[x.year]??=[]).push(x)
+ );
+
+
+ const years=
+  Object.keys(grouped)
+   .sort(
+    (a,b)=>b.localeCompare(a)
+   );
+
+
+ modalboxEl.innerHTML=`
+
+ <div class="row between">
+
+  <h2 style="margin:0">
+   ${esc(p.number)}
+  </h2>
+
+
+  <button
+   type="button"
+   class="secondary"
+   onclick="closeModal()">
+
+   Close
+
+  </button>
+
+ </div>
+
+
+ <div class="panel">
+
+  <h3>
+   ${esc(p.name||"No Cross entered")}
+  </h3>
+
+
+  <b>
+   ${esc(p.folder)}
+   →
+   ${esc(p.sub)}
+  </b>
+
+
+  <p>
+
+   ${
+    p.leafLength&&p.leafBreadth
+    ?
+    `
+    <b>Leaf:</b>
+    ${esc(p.leafLength)}
+    ×
+    ${esc(p.leafBreadth)}
+    cm
+    <br>
+    `
+    :
+    ""
+   }
+
+
+   <b>Breeder:</b>
+   ${esc(p.breeder||"—")}
+   <br>
+
+
+   <b>Parentage:</b>
+   ${esc(p.parentage||"—")}
+   <br>
+
+
+   <b>Acquired:</b>
+   ${esc(p.acq||"—")}
+   <br>
+
+
+   <b>First flowered:</b>
+   ${esc(p.flower||"—")}
+
+  </p>
+
+
+  <p>
+   ${esc(p.notes||"")}
+  </p>
+
+ </div>
+
+
+ ${
+  years.length
+  ?
+  years.map(
+   y=>`
+
+   <div class="yearHeader">
+    ${esc(y)}
+   </div>
+
+
+   <div class="photoGrid">
+
+    ${
+     grouped[y].map(
+      x=>`
+
+      <div class="photoBox">
+
+       <img
+        src="${x.data||""}"
+        alt="">
+
+      </div>
+
+      `
+     ).join("")
+    }
+
+   </div>
+
+   `
+  ).join("")
+  :
+  `
+  <div class="empty">
+   No photos yet.
+  </div>
+  `
+ }
+
+
+ <br>
+
+
+ <button
+  type="button"
+  class="primary"
+  onclick="addYearPhotos('${p.id}')">
+
+  Add Photos From Another Year
+
+ </button>
+
+
+ <br><br>
+
+
+ <button
+  type="button"
+  class="secondary"
+  onclick="editPlant('${p.id}')">
+
+  Edit Plant
+
+ </button>
+
+
+ <button
+  type="button"
+  class="danger"
+  onclick="deletePlant('${p.id}')">
+
+  Delete
+
+ </button>
+
+ `;
+
+
+ openModal();
+
+}
+
+
+/* =========================================================
+   ADD YEAR PHOTOS
+========================================================= */
+
+function addYearPhotos(pid){
+
+ const p=
+  data.plants.find(
+   x=>x.id===pid
+  );
+
+
+ if(!p)return;
+
+
+ if(!Array.isArray(p.photos))
+  p.photos=[];
+
+
+ modalboxEl.innerHTML=`
+
+ <div class="row between">
+
+  <h2 style="margin:0">
+   Add Photos
+  </h2>
+
+
+  <button
+   type="button"
+   class="secondary"
+   onclick="closeModal()">
+
+   Close
+
+  </button>
+
+ </div>
+
+
+ <div class="panel">
+
+  <h3>
+   ${esc(p.number)}
+  </h3>
+
+
+  <div class="field">
+
+   <label>Photo Year</label>
+
+   <input
+    id="newYear"
+    type="number"
+    value="${new Date().getFullYear()}">
+
+  </div>
+
+
+  <div class="photoChoices">
+
+   <button
+    type="button"
+    class="photoChoice"
+    onclick="openYearCamera('${p.id}')">
+
+    📷 Take Photo
+
+   </button>
+
+
+   <button
+    type="button"
+    class="photoChoice"
+    onclick="document.getElementById('yearGallery').click()">
+
+    🖼 Gallery
+
+   </button>
+
+  </div>
+
+
+  <input
+   id="yearCamera"
+   type="file"
+   accept="image/*"
+   capture="environment"
+   hidden
+   onchange="handleYearFallbackCamera(this,'${p.id}')">
+
+
+  <input
+   id="yearGallery"
+   type="file"
+   accept="image/*"
+   multiple
+   hidden
+   onchange="addYearGalleryPhotos(this,'${p.id}')">
+
+
+  <div
+   id="yearSaveStatus"
+   class="saveStatus">
+  </div>
+
+
+  <div class="photoStorageNote">
+
+   <b>Photo quality:</b>
+
+   The catalogue stores a compressed
+   copy.
+
+   The original photo is not changed.
+
+   Google Drive receives the original-quality
+   file when it is available.
+
+  </div>
+
+ </div>
+
+ `;
+
+
+ openModal();
+
+}
+
+
+/* =========================================================
+   YEAR CAMERA
+========================================================= */
+
+function openYearCamera(pid){
+
+ if(photosProcessing){
+
+  toast(
+   "Please wait for the current photo to finish."
+  );
+
+  return;
+
+ }
+
+
+ cameraTarget="year";
+ cameraPlantId=pid;
+
+
+ if(
+  navigator.mediaDevices &&
+  navigator.mediaDevices.getUserMedia
+ ){
+
+  navigator.mediaDevices
+   .getUserMedia({
+
+    video:{
+     facingMode:{
+      ideal:"environment"
+     },
+     width:{
+      ideal:1920
+     },
+     height:{
+      ideal:1080
+     }
+    },
+
+    audio:false
+
+   })
+   .then(
+    stream=>{
+
+     cameraStream=stream;
+
+     showCameraScreen();
+
+    }
+   )
+   .catch(
+    error=>{
+
+     console.warn(
+      "Rear camera unavailable:",
+      error
+     );
+
+
+     const camera=
+      document.getElementById(
+       "yearCamera"
+      );
+
+
+     if(!camera){
+
+      toast(
+       "Camera is not available."
+      );
+
+      return;
+
+     }
+
+
+     camera.value="";
+
+     camera.click();
+
+    }
+   );
+
+
+  return;
+
+ }
+
+
+ const camera=
+  document.getElementById(
+   "yearCamera"
+  );
+
+
+ if(camera){
+
+  camera.value="";
+  camera.click();
+
+ }else{
+
+  toast(
+   "Camera is not available."
+  );
+
+ }
+
+}
+
+
+/* =========================================================
+   YEAR CAMERA FALLBACK
+========================================================= */
+
+async function handleYearFallbackCamera(
+ input,
+ pid
+){
+
+ if(!input)
+  return;
+
+
+ const file=
+  input.files &&
+  input.files.length
+  ?
+  input.files[0]
+  :
+  null;
+
+
+ input.value="";
+
+
+ if(!file)
+  return;
+
+
+ await processYearCameraFile(
+  file,
+  pid
+ );
+
+}
+
+
+/* =========================================================
+   PROCESS YEAR CAMERA
+========================================================= */
+
+async function processYearCameraFile(
+ file,
+ pid
+){
+
+ if(!file)
+  return;
+
+
+ if(photosProcessing){
+
+  toast(
+   "Please wait for the current photo to finish."
+  );
+
+  return;
+
+ }
+
+
+ const p=
+  data.plants.find(
+   x=>x.id===pid
+  );
+
+
+ if(!p){
+
+  toast(
+   "Plant could not be found."
+  );
+
+  return;
+
+ }
+
+
+ if(!Array.isArray(p.photos))
+  p.photos=[];
+
+
+ const year=
+  document.getElementById(
+   "newYear"
+  )?.value ||
+  new Date().getFullYear();
+
+
+ photosProcessing=true;
+
+
+ document
+  .querySelectorAll(".photoChoice")
+  .forEach(
+   b=>b.disabled=true
+  );
+
+
+ const status=
+  document.getElementById(
+   "yearSaveStatus"
+  );
+
+
+ if(status)
+  status.textContent=
+   "Processing camera photo...";
+
+
+ toast(
+  "Processing camera photo..."
+ );
+
+
+ try{
+
+  const compressed=
+   await compressImage(file);
+
+
+  const id=uid();
+
+
+  originalPhotoFiles[id]=file;
+
+
+  const photo={
+
+   id:id,
+
+   name:
+    file.name||
+    `Clivia-Camera-${Date.now()}.jpg`,
+
+   year:String(year),
+
+   data:compressed,
+
+   synced:false,
+
+   addedAt:Date.now()
+
+  };
+
+
+  p.photos.push(photo);
+
+
+  if(!save()){
+
+   p.photos=
+    p.photos.filter(
+     x=>x.id!==id
+    );
+
+
+   delete originalPhotoFiles[id];
+
+   return;
+
+  }
+
+
+  if(status)
+   status.textContent=
+    "Camera photo added successfully.";
+
+
+  toast(
+   "Camera photo added"
+  );
+
+
+  if(googleUser)
+   uploadPlantPhotos(p);
+
+
+  closeModal();
+
+
+  viewPlant(pid);
+
+
+ }catch(error){
+
+  console.error(
+   "Year camera error:",
+   error
+  );
+
+
+  if(status)
+   status.textContent=
+    "Camera photo could not be processed.";
+
+
+  toast(
+   "Could not process the camera photo."
+  );
+
+ }finally{
+
+  photosProcessing=false;
+
+
+  document
+   .querySelectorAll(".photoChoice")
+   .forEach(
+    b=>b.disabled=false
+   );
+
+ }
+
+}
+
+
+/* =========================================================
+   YEAR GALLERY
+========================================================= */
+
+async function addYearGalleryPhotos(
+ input,
+ pid
+){
+
+ if(photosProcessing){
+
+  toast(
+   "Please wait for the current photo to finish."
+  );
+
+  return;
+
+ }
+
+
+ const p=
+  data.plants.find(
+   x=>x.id===pid
+  );
+
+
+ if(!p)return;
+
+
+ if(!Array.isArray(p.photos))
+  p.photos=[];
+
+
+ const files=
+  [...(input.files||[])];
+
+
+ if(!files.length)
+  return;
+
+
+ const year=
+  document.getElementById(
+   "newYear"
+  )?.value ||
+  new Date().getFullYear();
+
+
+ photosProcessing=true;
+
+
+ document
+  .querySelectorAll(".photoChoice")
+  .forEach(
+   b=>b.disabled=true
+  );
+
+
+ const status=
+  document.getElementById(
+   "yearSaveStatus"
+  );
+
+
+ if(status)
+  status.textContent=
+   "Processing gallery photo(s)...";
+
+
+ try{
+
+  const added=[];
+
+
+  for(const file of files){
+
+   try{
+
+    const compressed=
+     await compressImage(file);
+
+
+    const id=uid();
+
+
+    originalPhotoFiles[id]=file;
+
+
+    const photo={
+
+     id:id,
+
+     name:
+      file.name||
+      `Clivia-${Date.now()}.jpg`,
+
+     year:String(year),
+
+     data:compressed,
+
+     synced:false,
+
+     addedAt:Date.now()
+
+    };
+
+
+    p.photos.push(photo);
+
+    added.push(photo);
+
+
+   }catch(error){
+
+    console.error(error);
+
+
+    toast(
+     "One gallery photo could not be processed."
+    );
+
+   }
+
+  }
+
+
+  if(!save()){
+
+   p.photos=
+    p.photos.filter(
+     x=>
+      !added.some(
+       a=>a.id===x.id
+      )
+    );
+
+
+   added.forEach(
+    x=>
+     delete originalPhotoFiles[x.id]
+   );
+
+
+   return;
+
+  }
+
+
+  input.value="";
+
+
+  closeModal();
+
+
+  toast(
+   "Photos added successfully"
+  );
+
+
+  if(googleUser)
+   uploadPlantPhotos(p);
+
+
+  viewPlant(pid);
+
+
+ }finally{
+
+  photosProcessing=false;
+
+
+  document
+   .querySelectorAll(".photoChoice")
+   .forEach(
+    b=>b.disabled=false
+   );
+
+ }
+
+}
+
+
+/* =========================================================
+   EDIT PLANT
+========================================================= */
+
+function editPlant(pid){
+
+ const p=
+  data.plants.find(
+   x=>x.id===pid
+  );
+
+
+ if(!p)return;
+
+
+ openPlant(
+  p.folder,
+  p.sub
+ );
+
+
+ setTimeout(
+  ()=>{
+
+   const get=
+    id=>
+     document.getElementById(id);
+
+
+   if(!get("pnumber"))
+    return;
+
+
+   get("pnumber").value=
+    p.number||"";
+
+
+   get("pname").value=
+    p.name||"";
+
+
+   if(get("leafLength"))
+    get("leafLength").value=
+     p.leafLength||"";
+
+
+   if(get("leafBreadth"))
+    get("leafBreadth").value=
+     p.leafBreadth||"";
+
+
+   get("breeder").value=
+    p.breeder||"";
+
+
+   get("parentage").value=
+    p.parentage||"";
+
+
+   get("acq").value=
+    p.acq||"";
+
+
+   get("flower").value=
+    p.flower||"";
+
+
+   get("notes").value=
+    p.notes||"";
+
+
+   newPhotos=
+    JSON.parse(
+     JSON.stringify(
+      p.photos||[]
+     )
+    );
+
+
+   originalPhotoFiles={};
+
+
+   renderPreview();
+
+
+   const saveButton=
+    document.getElementById(
+     "savePlantButton"
+    );
+
+
+   if(saveButton){
+
+    saveButton.textContent=
+     "UPDATE PLANT";
+
+
+    saveButton.onclick=
+     event=>{
+
+      if(event){
+
+       event.preventDefault();
+       event.stopPropagation();
+
+      }
+
+
+      updatePlant(p);
+
+     };
+
+   }
+
+  },
+  50
+ );
+
+}
+
+
+/* =========================================================
+   UPDATE PLANT
+========================================================= */
+
+async function updatePlant(p){
+
+ if(plantSaving){
+
+  toast(
+   "Plant is already being updated."
+  );
+
+  return;
+
+ }
+
+
+ if(photosProcessing){
+
+  toast(
+   "Please wait for photo processing."
+  );
+
+  return;
+
+ }
+
+
+ /*
+  PLANT ID IS ALSO COMPULSORY
+  WHEN EDITING.
+ */
+
+ const newNumber=
+  document.getElementById(
+   "pnumber"
+  )?.value.trim()||"";
+
+
+ if(!newNumber){
+
+  const field=
+   document.getElementById(
+    "pnumber"
+   );
+
+
+  if(field){
+
+   field.focus();
+   field.reportValidity();
+
+  }
+
+
+  toast(
+   "Plant ID is required."
+  );
+
+
+  return;
+
+ }
+
+
+ plantSaving=true;
+
+
+ const button=
+  document.getElementById(
+   "savePlantButton"
+  );
+
+
+ if(button){
+
+  button.disabled=true;
+  button.textContent="UPDATING...";
+
+ }
+
+
+ try{
+
+  let nf=
+   document.getElementById(
+    "pfolder"
+   ).value;
+
+
+  let ns=
+   document.getElementById(
+    "psub"
+   ).value;
+
+
+  let nl=
+   document.getElementById(
+    "leafLength"
+   )?.value||"";
+
+
+  let nb=
+   document.getElementById(
+    "leafBreadth"
+   )?.value||"";
+
+
+  if(
+   MEASUREMENT_FOLDERS.has(nf)
+  ){
+
+   if(!nl||!nb){
+
+    toast(
+     "Enter leaf length and breadth"
+    );
+
+    return;
+
+   }
+
+
+   ns=
+    `${Number(nl)} × ${Number(nb)} cm`;
+
+
+   const ff=
+    data.folders.find(
+     x=>x.name===nf
+    );
+
+
+   if(
+    ff &&
+    !ff.subs.includes(ns)
+   )
+    ff.subs.push(ns);
+
+  }
+
+
+  const oldData=
+   JSON.stringify(p);
+
+
+  Object.assign(
+   p,
+   {
+
+    number:newNumber,
+
+
+    name:
+     document.getElementById(
+      "pname"
+     ).value.trim(),
+
+
+    folder:nf,
+
+    sub:ns,
+
+
+    leafLength:nl,
+
+    leafBreadth:nb,
+
+
+    breeder:
+     document.getElementById(
+      "breeder"
+     ).value.trim(),
+
+
+    parentage:
+     document.getElementById(
+      "parentage"
+     ).value.trim(),
+
+
+    acq:
+     document.getElementById(
+      "acq"
+     ).value,
+
+
+    flower:
+     document.getElementById(
+      "flower"
+     ).value,
+
+
+    notes:
+     document.getElementById(
+      "notes"
+     ).value.trim(),
+
+
+    photos:
+     newPhotos.map(
+      x=>({...x})
+     )
+
+   }
+  );
+
+
+  if(!save()){
+
+   Object.assign(
+    p,
+    JSON.parse(oldData)
+   );
+
+
+   toast(
+    "Plant could not be updated."
+   );
+
+
+   return;
+
+  }
+
+
+  newPhotos=[];
+
+
+  closeModal();
+
+
+  home();
+
+
+  toast(
+   "Plant updated successfully"
+  );
+
+
+  if(googleUser)
+   uploadPlantPhotos(p);
+
+
+ }finally{
+
+  plantSaving=false;
+
+
+  if(button)
+   button.disabled=false;
+
+ }
+
+}
+
+
+/* =========================================================
+   DELETE
+========================================================= */
+
+function deletePlant(pid){
+
+ if(
+  confirm(
+   "Delete this plant and its catalogue record?"
+  )
+ ){
+
+  data.plants=
+   data.plants.filter(
+    p=>p.id!==pid
+   );
+
+
+  if(!save())
+   return;
+
+
+  closeModal();
+
+
+  home();
+
+
+  toast(
+   "Plant deleted"
+  );
+
+ }
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function searchView(){
+
+ appEl.innerHTML=`
+
+ <h2 style="margin-top:0">
+  Search Collection
+ </h2>
+
+
+ <input
+  class="search"
+  id="q"
+  placeholder="Search ID, cross, breeder, parentage, colour or year...">
+
+
+ <div id="results"></div>
+
+ `;
+
+
+ const q=
+  document.getElementById("q");
+
+
+ if(q)
+  q.oninput=
+   runSearch;
+
+
+ runSearch();
+
+}
+
+
+function runSearch(){
+
+ const q=
+  (
+   document.getElementById("q")?.value||
+   ""
+  ).toLowerCase();
+
+
+ const ps=
+  data.plants.filter(
+   p=>
+    JSON.stringify(p)
+     .toLowerCase()
+     .includes(q)
+  );
+
+
+ const results=
+  document.getElementById(
+   "results"
+  );
+
+
+ if(!results)return;
+
+
+ results.innerHTML=
+  ps.length
+  ?
+  `
+  <div class="plantgrid">
+   ${ps.map(card).join("")}
+  </div>
+  `
+  :
+  `
+  <div class="empty">
+   No plants found.
+  </div>
+  `;
+
+}
+
+
+/* =========================================================
+   SETTINGS
+========================================================= */
+
+function settingsView(){
+
+ modalboxEl.innerHTML=`
+
+ <div class="row between">
+
+  <h2 style="margin:0">
+   Settings
+  </h2>
+
+
+  <button
+   type="button"
+   class="secondary"
+   onclick="closeModal()">
+
+   Done
+
+  </button>
+
+ </div>
+
+
+ <div class="panel">
+
+  <div class="crumb">
+   Account & backup
+  </div>
+
+
+  <h3>
+   Google Drive
+  </h3>
+
+
+  <p
+   style="color:var(--muted);font-size:13px">
+
+   Connect your Google account to
+   back up your Clivia catalogue
+   and photographs.
+
+  </p>
+
+
+  ${
+   googleUser
+   ?
+   `
+   <button
+    type="button"
+    class="primary"
+    style="width:100%;margin-bottom:10px"
+    onclick="accountView()">
+
+    Open Google Drive Account
+
+   </button>
+
+
+   <button
+    type="button"
+    class="secondary"
+    style="width:100%"
+    onclick="cloneCatalogueToDrive()">
+
+    Sync Catalogue to Drive
+
+   </button>
+   `
+   :
+   `
+   <button
+    type="button"
+    class="google"
+    onclick="signInGoogle()">
+
+    Log in to Google Drive
+
+   </button>
+   `
+  }
+
+ </div>
+
+
+ <div class="panel">
+
+  <div class="crumb">
+   Catalogue
+  </div>
+
+
+  <h3>
+   Manage Collection
+  </h3>
+
+
+  <p
+   style="color:var(--muted);font-size:13px">
+
+   Add, rename or remove main
+   folders and subfolders.
+
+  </p>
+
+
+  <button
+   type="button"
+   class="secondary"
+   style="width:100%"
+   onclick="openManage()">
+
+   Manage Folders
+
+  </button>
+
+ </div>
+
+ `;
+
+
+ openModal();
+
+}
+
+
+/* =========================================================
+   MANAGE
+========================================================= */
+
+function openManage(){
+
+ modalboxEl.innerHTML=`
+
+ <div class="row between">
+
+  <h2 style="margin:0">
+   Manage Collection
+  </h2>
+
+
+  <button
+   type="button"
+   class="secondary"
+   onclick="closeModal()">
+
+   Done
+
+  </button>
+
+ </div>
+
+
+ <p style="color:var(--muted)">
+
+  Add, rename or delete main folders
+  and subfolders.
+
+ </p>
+
+
+ <button
+  type="button"
+  class="primary"
+  onclick="addMain()">
+
+  Add Main Folder
+
+ </button>
+
+
+ <div style="margin-top:15px">
+
+ ${
+  data.folders.map(
+   (f,i)=>`
+
+   <div class="panel">
+
+    <div class="row between">
+
+     <b>${esc(f.name)}</b>
+
+
+     <span>
+
+      <button
+       type="button"
+       class="secondary"
+       onclick="renameMain(${i})">
+
+       Rename
+
+      </button>
+
+
+      <button
+       type="button"
+       class="danger"
+       onclick="deleteMain(${i})">
+
+       Delete
+
+      </button>
+
+     </span>
+
+    </div>
+
+
+    ${
+     f.subs.map(
+      (s,j)=>`
+
+      <div class="manageitem">
+
+       <span>
+        ${esc(s)}
+       </span>
+
+
+       <span>
+
+        <button
+         type="button"
+         class="secondary"
+         onclick="renameSub(${i},${j})">
+
+         Rename
+
+        </button>
+
+
+        <button
+         type="button"
+         class="danger"
+         onclick="deleteSub(${i},${j})">
+
+         Remove
+
+        </button>
+
+       </span>
+
+      </div>
+
+      `
+     ).join("")
+    }
+
+
+    <button
+     type="button"
+     class="secondary"
+     style="margin-top:10px"
+     onclick="addSub(${i})">
+
+     Add Subfolder
+
+    </button>
+
+   </div>
+
+   `
+  ).join("")
+ }
+
+ </div>
+
+ `;
+
+
+ openModal();
+
+}
+
+
+function addMain(){
+
+ const n=
+  prompt(
+   "Main folder name:"
+  );
+
+
+ if(n?.trim()){
+
+  if(
+   data.folders.some(
+    f=>
+     f.name.toLowerCase()===
+     n.trim().toLowerCase()
+   )
+  ){
+
+   toast(
+    "That folder already exists."
+   );
+
+   return;
+
+  }
+
+
+  data.folders.push({
+
+   name:n.trim(),
+   subs:[]
+
+  });
+
+
+  if(!save())return;
+
+
+  openManage();
+
+ }
+
+}
+
+
+function addSub(i){
+
+ const n=
+  prompt(
+   "Subfolder / colour name:"
+  );
+
+
+ if(n?.trim()){
+
+  data.folders[i].subs.push(
+   n.trim()
+  );
+
+
+  if(!save())return;
+
+
+  openManage();
+
+ }
+
+}
+
+
+function renameMain(i){
+
+ const n=
+  prompt(
+   "Rename folder:",
+   data.folders[i].name
+  );
+
+
+ if(n?.trim()){
+
+  const old=
+   data.folders[i].name;
+
+
+  data.plants.forEach(
+   p=>{
+
+    if(p.folder===old)
+     p.folder=n.trim();
+
+   }
+  );
+
+
+  data.folders[i].name=n.trim();
+
+
+  if(!save())return;
+
+
+  openManage();
+
+
+  home();
+
+ }
+
+}
+
+
+function renameSub(i,j){
+
+ const n=
+  prompt(
+   "Rename subfolder:",
+   data.folders[i].subs[j]
+  );
+
+
+ if(n?.trim()){
+
+  const old=
+   data.folders[i].subs[j];
+
+
+  const fn=
+   data.folders[i].name;
+
+
+  data.plants.forEach(
+   p=>{
+
+    if(
+     p.folder===fn &&
+     p.sub===old
+    )
+     p.sub=n.trim();
+
+   }
+  );
+
+
+  data.folders[i].subs[j]=n.trim();
+
+
+  if(!save())return;
+
+
+  openManage();
+
+ }
+
+}
+
+
+function deleteMain(i){
+
+ if(
+  confirm(
+   "Delete this main folder? Existing plants will remain in the catalogue."
+  )
+ ){
+
+  data.folders.splice(i,1);
+
+
+  if(!save())return;
+
+
+  openManage();
+
+
+  home();
+
+ }
+
+}
+
+
+function deleteSub(i,j){
+
+ if(
+  confirm(
+   "Delete this subfolder? Existing plants will remain in the catalogue."
+  )
+ ){
+
+  data.folders[i].subs.splice(j,1);
+
+
+  if(!save())return;
+
+
+  openManage();
+
+ }
+
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+function openModal(){
+
+ modalEl.classList.remove(
+  "hidden"
+ );
+
+}
+
+
+function closeModal(){
+
+ if(cameraStream)
+  closeCamera();
+
+
+ modalEl.classList.add(
+  "hidden"
+ );
+
+}
+
+
+modalEl.addEventListener(
+ "click",
+ e=>{
+
+  if(e.target===modalEl)
+   closeModal();
+
+ }
+);
+
+
+/* =========================================================
+   TOAST
+========================================================= */
+
+function toast(t){
+
+ const d=
+  document.createElement("div");
+
+
+ d.className="toast";
+
+
+ d.textContent=t;
+
+
+ document.body.appendChild(d);
+
+
+ setTimeout(
+  ()=>d.remove(),
+  3000
+ );
+
+}
+
+
+/* =========================================================
+   GOOGLE DRIVE
+========================================================= */
+
+function hasLiveDriveAccess(){
+
+ return !!(
+  accessToken &&
+  tokenExpiresAt &&
+  Date.now()<tokenExpiresAt
+ );
+
+}
+
+
+function initGoogle(){
+
+ if(
+  !window.google?.accounts?.oauth2
+ ){
+
+  setTimeout(
+   initGoogle,
+   500
+  );
+
+  return;
+
+ }
+
+
+ googleTokenClient=
+  google.accounts.oauth2
+   .initTokenClient({
+
+    client_id:
+     GOOGLE_CLIENT_ID,
+
+    scope:
+     "openid email profile "+
+     DRIVE_SCOPE,
+
+    callback:
+     handleToken
+
+   });
+
+}
+
+
+function handleToken(r){
+
+ if(r.error){
+
+  toast(
+   "Google sign-in failed: "+
+   r.error
+  );
+
+  return;
+
+ }
+
+
+ accessToken=
+  r.access_token;
+
+
+ tokenExpiresAt=
+  Date.now()+
+  (
+   Number(r.expires_in||3000)*
+   1000
+  );
+
+
+ loadGoogleUser();
+
+}
+
+
+function signInGoogle(){
+
+ if(!googleTokenClient){
+
+  toast(
+   "Google sign-in is still loading. Try again."
+  );
+
+  return;
+
+ }
+
+
+ googleTokenClient
+  .requestAccessToken({
+   prompt:"consent"
+  });
+
+}
+
+
+async function loadGoogleUser(){
+
+ try{
+
+  const r=
+   await fetch(
+    "https://www.googleapis.com/oauth2/v3/userinfo",
+    {
+     headers:{
+      Authorization:
+       "Bearer "+accessToken
+     }
+    }
+   );
+
+
+  if(!r.ok)
+   throw new Error(
+    "userinfo"
+   );
+
+
+  googleUser=
+   await r.json();
+
+
+  localStorage.setItem(
+   "cliviaGoogleUser",
+   JSON.stringify(googleUser)
+  );
+
+
+  accountView();
+
+
+  toast(
+   "Google Drive connected"
+  );
+
+
+ }catch(e){
+
+  console.error(e);
+
+
+  toast(
+   "Could not read Google account"
+  );
+
+ }
+
+}
+
+
+function restoreGoogleUser(){
+
+ try{
+
+  googleUser=
+   JSON.parse(
+    localStorage.getItem(
+     "cliviaGoogleUser"
+    )||"null"
+   );
+
+ }catch(e){
+
+  googleUser=null;
+
+ }
+
+}
+
+
+/* =========================================================
+   GOOGLE ACCOUNT
+========================================================= */
+
+function accountView(){
+
+ modalboxEl.innerHTML=
+
+ googleUser
+ ?
+
+ `
+ <div class="row between">
+
+  <h2 style="margin:0">
+   Google Account
+  </h2>
+
+
+  <button
+   type="button"
+   class="secondary"
+   onclick="closeModal()">
+
+   Close
+
+  </button>
+
+ </div>
+
+
+ <div class="user">
+
+  ${
+   googleUser.picture
+   ?
+   `
+   <img
+    src="${esc(googleUser.picture)}">
+   `
+   :
+   ""
+  }
+
+
+  <div>
+
+   <b>
+    ${esc(
+     googleUser.name||
+     "Google User"
+    )}
+   </b>
+
+
+   <br>
+
+
+   <small>
+    ${esc(
+     googleUser.email||
+     ""
+    )}
+   </small>
+
+  </div>
+
+ </div>
+
+
+ ${
+  hasLiveDriveAccess()
+  ?
+  `
+  <div class="sync ok">
+
+   Google Drive is connected.
+
+  </div>
+  `
+  :
+  `
+  <div class="sync bad">
+
+   Drive permission needs reconnecting.
+
+   <br><br>
+
+
+   <button
+    type="button"
+    class="secondary"
+    onclick="reconnectDrive()">
+
+    Reconnect
+
+   </button>
+
+  </div>
+  `
+ }
+
+
+ <button
+  type="button"
+  class="secondary"
+  style="width:100%;margin-bottom:10px"
+  onclick="cloneCatalogueToDrive()">
+
+  Sync catalogue to Drive
+
+ </button>
+
+
+ <button
+  type="button"
+  class="secondary"
+  style="width:100%;margin-bottom:10px"
+  onclick="forceResyncAllToDrive()">
+
+  Force re-upload photos
+
+ </button>
+
+
+ <button
+  type="button"
+  class="danger"
+  onclick="signOutGoogle()">
+
+  Sign Out
+
+ </button>
+
+ `
+ :
+ `
+ <div class="row between">
+
+  <h2 style="margin:0">
+   Google Account
+  </h2>
+
+
+  <button
+   type="button"
+   class="secondary"
+   onclick="closeModal()">
+
+   Close
+
+  </button>
+
+ </div>
+
+
+ <div class="panel">
+
+  <h3>
+   Connect Google Drive
+  </h3>
+
+
+  <p>
+
+   Sign in with your Google account
+   to store your Clivia photographs
+   in Google Drive.
+
+  </p>
+
+
+  <button
+   type="button"
+   class="google"
+   onclick="signInGoogle()">
+
+   Sign in with Google
+
+  </button>
+
+
+  <br><br>
+
+
+  <a
+   href="https://accounts.google.com/signup"
+   target="_blank"
+   rel="noopener">
+
+   Create a Google account
+
+  </a>
+
+ </div>
+ `;
+
+
+ openModal();
+
+}
+
+
+function signOutGoogle(){
+
+ accessToken=null;
+ googleUser=null;
+ tokenExpiresAt=null;
+
+
+ localStorage.removeItem(
+  "cliviaGoogleUser"
+ );
+
+
+ closeModal();
+
+
+ home();
+
+
+ toast(
+  "Signed out"
+ );
+
+}
+
+
+/* =========================================================
+   DRIVE ACCESS
+========================================================= */
+
+function ensureDriveAccess(force=false){
+
+ return new Promise(
+  (resolve,reject)=>{
+
+   if(
+    hasLiveDriveAccess() &&
+    !force
+   )
+    return resolve(accessToken);
+
+
+   if(!googleTokenClient){
+
+    reject(
+     new Error(
+      "Google not ready"
+     )
+    );
+
+    return;
+
+   }
+
+
+   const old=
+    googleTokenClient.callback;
+
+
+   googleTokenClient.callback=
+    r=>{
+
+     googleTokenClient.callback=
+      old;
+
+
+     if(r.error){
+
+      reject(
+       new Error(r.error)
+      );
+
+      return;
+
+     }
+
+
+     accessToken=
+      r.access_token;
+
+
+     tokenExpiresAt=
+      Date.now()+
+      (
+       Number(
+        r.expires_in||3000
+       )*1000
+      );
+
+
+     resolve(accessToken);
+
+    };
+
+
+   googleTokenClient
+    .requestAccessToken({
+
+     prompt:
+      force
+      ?
+      "consent"
+      :
+      ""
+
+    });
+
+  }
+ );
+
+}
+
+
+async function driveRequest(
+ url,
+ options={}
+){
+
+ const token=
+  await ensureDriveAccess(false);
+
+
+ const r=
+  await fetch(
+   url,
+   {
+    ...options,
+
+    headers:{
+     ...(options.headers||{}),
+
+     Authorization:
+      "Bearer "+token
+
+    }
+
+   }
+  );
+
+
+ if(!r.ok)
+  throw new Error(
+   await r.text()
+  );
+
+
+ return r;
+
+}
+
+
+/* =========================================================
+   DRIVE FOLDERS
+========================================================= */
+
+async function findDriveFolder(
+ name,
+ parentId
+){
+
+ let q=
+  `name='${String(name)
+   .replace(/'/g,"\\'")}' `+
+  `and mimeType='application/vnd.google-apps.folder' `+
+  `and trashed=false`;
+
+
+ if(parentId)
+  q+=
+   ` and '${parentId}' in parents`;
+
+
+ const r=
+  await driveRequest(
+   "https://www.googleapis.com/drive/v3/files?"+
+   new URLSearchParams({
+
+    q,
+
+    fields:"files(id,name)",
+
+    pageSize:"10"
+
+   })
+  );
+
+
+ const j=
+  await r.json();
+
+
+ return j.files?.[0]||null;
+
+}
+
+
+async function createDriveFolder(
+ name,
+ parentId
+){
+
+ const body={
+
+  name,
+
+  mimeType:
+   "application/vnd.google-apps.folder"
+
+ };
+
+
+ if(parentId)
+  body.parents=[parentId];
+
+
+ const r=
+  await driveRequest(
+   "https://www.googleapis.com/drive/v3/files",
+   {
+
+    method:"POST",
+
+    headers:{
+     "Content-Type":
+      "application/json"
+    },
+
+    body:
+     JSON.stringify(body)
+
+   }
+  );
+
+
+ return r.json();
+
+}
+
+
+async function getOrCreateDriveFolder(
+ name,
+ parentId
+){
+
+ return await findDriveFolder(
+  name,
+  parentId
+ )
+ ||
+ await createDriveFolder(
+  name,
+  parentId
+ );
+
+}
+
+
+async function getPlantBaseFolder(p){
+
+ const root=
+  await getOrCreateDriveFolder(
+   "My Clivia Collection"
+  );
+
+
+ const main=
+  await getOrCreateDriveFolder(
+   p.folder,
+   root.id
+  );
+
+
+ const sub=
+  await getOrCreateDriveFolder(
+   p.sub,
+   main.id
+  );
+
+
+ return getOrCreateDriveFolder(
+  p.number,
+  sub.id
+ );
+
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+function plantDetailsText(p){
+
+ return `My Clivia Collection
+
+Plant ID: ${p.number||""}
+Cross (Name/Cross): ${p.name||""}
+Folder: ${p.folder||""}
+Subfolder: ${p.sub||""}
+Breeder: ${p.breeder||""}
+Parentage: ${p.parentage||""}
+Acquired: ${p.acq||""}
+First Flowered: ${p.flower||""}
+Notes: ${p.notes||""}
+`;
+
+}
+
+
+/* =========================================================
+   DRIVE TEXT FILE
+========================================================= */
+
+async function upsertDriveTextFile(
+ name,
+ parentId,
+ text
+){
+
+ const q=
+  `name='${name}' and trashed=false and '${parentId}' in parents`;
+
+
+ const r=
+  await driveRequest(
+   "https://www.googleapis.com/drive/v3/files?"+
+   new URLSearchParams({
+
+    q,
+
+    fields:"files(id,name)",
+
+    pageSize:"1"
+
+   })
+  );
+
+
+ const j=
+  await r.json();
+
+
+ const file=
+  j.files?.[0];
+
+
+ if(file){
+
+  return driveRequest(
+   `https://www.googleapis.com/upload/drive/v3/files/${file.id}?uploadType=media`,
+   {
+
+    method:"PATCH",
+
+    headers:{
+     "Content-Type":
+      "text/plain"
+    },
+
+    body:text
+
+   }
+  ).then(
+   x=>x.json()
+  );
+
+ }
+
+
+ const meta={
+
+  name,
+
+  parents:[parentId],
+
+  mimeType:"text/plain"
+
+ };
+
+
+ const boundary=
+  "clivia"+
+  Date.now();
+
+
+ const body=
+  `--${boundary}\r\n`+
+  `Content-Type: application/json; charset=UTF-8\r\n\r\n`+
+  `${JSON.stringify(meta)}\r\n`+
+  `--${boundary}\r\n`+
+  `Content-Type: text/plain\r\n\r\n`+
+  `${text}\r\n`+
+  `--${boundary}--`;
+
+
+ return driveRequest(
+  "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+  {
+
+   method:"POST",
+
+   headers:{
+    "Content-Type":
+     "multipart/related; boundary="+
+     boundary
+   },
+
+   body
+
+  }
+ ).then(
+   x=>x.json()
+ );
+
+}
+
+
+/* =========================================================
+   DRIVE PHOTO UPLOAD
+========================================================= */
+
+async function uploadPhotoToDrive(
+ blob,
+ p,
+ year
+){
+
+ const base=
+  await getPlantBaseFolder(p);
+
+
+ const yf=
+  await getOrCreateDriveFolder(
+   String(year),
+   base.id
+  );
+
+
+ const meta={
+
+  name:
+   blob.name||
+   `Clivia-${Date.now()}.jpg`,
+
+  parents:[yf.id]
+
+ };
+
+
+ const boundary=
+  "clivia"+
+  Date.now();
+
+
+ const head=
+  `--${boundary}\r\n`+
+  `Content-Type: application/json; charset=UTF-8\r\n\r\n`+
+  `${JSON.stringify(meta)}\r\n`+
+  `--${boundary}\r\n`+
+  `Content-Type: ${
+   blob.type||
+   "image/jpeg"
+  }\r\n\r\n`;
+
+
+ const tail=
+  `\r\n--${boundary}--`;
+
+
+ const bytes=
+  await blob.arrayBuffer();
+
+
+ const enc=
+  new TextEncoder();
+
+
+ const body=
+  new Blob([
+   enc.encode(head),
+   bytes,
+   enc.encode(tail)
+  ]);
+
+
+ const r=
+  await driveRequest(
+   "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart&fields=id,name",
+   {
+
+    method:"POST",
+
+    headers:{
+     "Content-Type":
+      "multipart/related; boundary="+
+      boundary
+    },
+
+    body
+
+   }
+  );
+
+
+ return r.json();
+
+}
+
+
+/* =========================================================
+   UPLOAD PLANT PHOTOS
+========================================================= */
+
+async function uploadPlantPhotos(p){
+
+ try{
+
+  await ensureDriveAccess(false);
+
+
+  const base=
+   await getPlantBaseFolder(p);
+
+
+  await upsertDriveTextFile(
+   "Details.txt",
+   base.id,
+   plantDetailsText(p)
+  );
+
+
+  for(
+   const photo of p.photos||[]
+  ){
+
+   if(photo.synced)
+    continue;
+
+
+   let original=
+    originalPhotoFiles[
+     photo.id
+    ];
+
+
+   let blob=null;
+
+
+   if(original){
+
+    blob=original;
+
+    console.log(
+     "Uploading ORIGINAL:",
+     photo.name
+    );
+
+
+   }else{
+
+    blob=
+     dataURLtoBlob(
+      photo.data
+     );
+
+    console.log(
+     "Uploading catalogue copy:",
+     photo.name
+    );
+
+   }
+
+
+   if(!blob)
+    continue;
+
+
+   const r=
+    await uploadPhotoToDrive(
+     blob,
+     p,
+     photo.year
+    );
+
+
+   photo.synced=true;
+
+
+   photo.driveFileId=
+    r.id;
+
+
+   delete originalPhotoFiles[
+    photo.id
+   ];
+
+  }
+
+
+  save();
+
+
+  toast(
+   "Drive backup updated"
+  );
+
+
+ }catch(e){
+
+  console.error(
+   "Drive upload error:",
+   e
+  );
+
+
+  toast(
+   "Saved locally. Drive upload failed; use Sync later."
+  );
+
+ }
+
+}
+
+
+/* =========================================================
+   DATA URL → BLOB
+========================================================= */
+
+function dataURLtoBlob(u){
+
+ if(!u)
+  return null;
+
+
+ const a=u.split(",");
+
+
+ const m=
+  (
+   a[0].match(
+    /:(.*?);/
+   )||[]
+  )[1]||
+  "image/jpeg";
+
+
+ const b=atob(a[1]);
+
+
+ const x=
+  new Uint8Array(
+   b.length
+  );
+
+
+ for(
+  let i=0;
+  i<b.length;
+  i++
+ )
+  x[i]=
+   b.charCodeAt(i);
+
+
+ return new Blob(
+  [x],
+  {type:m}
+ );
+
+}
+
+
+/* =========================================================
+   DRIVE CATALOGUE SYNC
+========================================================= */
+
+async function cloneCatalogueToDrive(){
+
+ if(!googleUser){
+
+  toast(
+   "Sign in to Google first"
+  );
+
+  return;
+
+ }
+
+
+ try{
+
+  await ensureDriveAccess(false);
+
+
+  toast(
+   "Building Drive folders..."
+  );
+
+
+  const root=
+   await getOrCreateDriveFolder(
+    "My Clivia Collection"
+   );
+
+
+  for(
+   const f of data.folders
+  ){
+
+   const main=
+    await getOrCreateDriveFolder(
+     f.name,
+     root.id
+    );
+
+
+   for(
+    const s of f.subs
+   ){
+
+    await getOrCreateDriveFolder(
+     s,
+     main.id
+    );
+
+   }
+
+  }
+
+
+  for(
+   const p of data.plants
+  ){
+
+   await uploadPlantPhotos(p);
+
+  }
+
+
+  toast(
+   "Google Drive sync complete"
+  );
+
+
+  accountView();
+
+
+ }catch(e){
+
+  console.error(
+   "Drive sync failed:",
+   e
+  );
+
+
+  toast(
+   "Drive sync failed"
+  );
+
+ }
+
+}
+
+
+/* =========================================================
+   FORCE RESYNC
+========================================================= */
+
+async function forceResyncAllToDrive(){
+
+ data.plants.forEach(
+  p=>
+   (p.photos||[]).forEach(
+    x=>x.synced=false
+   )
+ );
+
+
+ if(!save())
+  return;
+
+
+ await cloneCatalogueToDrive();
+
+}
+
+
+/* =========================================================
+   RECONNECT
+========================================================= */
+
+function reconnectDrive(){
+
+ accessToken=null;
+ tokenExpiresAt=null;
+
+ signInGoogle();
+
+}
+
+
+/* =========================================================
+   RESTORE GOOGLE USER
+========================================================= */
+
+restoreGoogleUser();
+
+
+/* =========================================================
+   START APP
+========================================================= */
+
+try{
+
+ home();
+
+}catch(e){
+
+ console.error(
+  "Home render failed:",
+  e
+ );
+
+
+ appEl.innerHTML=`
+
+ <div class="panel empty">
+
+  <h2>
+   Collection could not be loaded
+  </h2>
+
+
+  <p>
+   Please refresh the app.
+   Your catalogue data has been protected.
+  </p>
+
+ </div>
+
+ `;
+
+}
+
+
+/* =========================================================
+   GOOGLE INITIALISATION
+========================================================= */
+
+window.addEventListener(
+ "load",
+ initGoogle
+);
+
+</script>
+
+
+<script>
+
+/* =========================================================
+   SERVICE WORKER
+========================================================= */
+
+if(
+ "serviceWorker" in navigator
+){
+
+ window.addEventListener(
+  "load",
+ ()=>{
+
+   navigator.serviceWorker
+    .register(
+     "service-worker.js",
+     {
+      scope:"./"
+     }
+    )
+    .catch(
+     e=>
+      console.warn(
+       "Service worker registration failed:",
+       e
+      )
+    );
+
+  }
+ );
+
+}
+
+</script>
+
+</body>
+</html>
